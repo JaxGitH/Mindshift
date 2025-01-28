@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Prefabs/Characters/Mesh_Character.prefab.meta
 guid: 182bbc5b44b5b744a838ec2f634e6d8f
+========
+guid: 9f29ff205dc19854cbdf03878d82dfef
+>>>>>>>> Stashed changes:Assets/Prefabs/PF_Camera.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
