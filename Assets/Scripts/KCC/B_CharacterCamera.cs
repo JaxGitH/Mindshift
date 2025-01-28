@@ -1,6 +1,5 @@
 using Mindshift;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace KinematicCharacterController
@@ -48,8 +47,20 @@ namespace KinematicCharacterController
         {
             _currentDistance = DefaultDistance;
             _targetDistance = DefaultDistance;
-            _planarDirection = Vector3.forward;
-            _targetVerticalAngle = DefaultVerticalAngle;
+//            _planarDirection = Vector3.forward;
+//            _targetVerticalAngle = DefaultVerticalAngle;
+
+            // Automatically find the Player's CameraTransform
+            B_PlayerController playerController = FindObjectOfType<B_PlayerController>();
+            if (playerController != null && playerController.CameraTransform != null)
+            {
+                SetFollowTransform(playerController.CameraTransform);
+                Debug.Log("Camera follow target set to: " + playerController.name);
+            }
+            else
+            {
+                Debug.LogError("PlayerController or CameraTransform not found!");
+            }
         }
 
         public void SetFollowTransform(Transform followTransform)
@@ -59,9 +70,22 @@ namespace KinematicCharacterController
             _currentFollowPosition = followTransform.position;
         }
 
+        private void Update()
+        {
+            // Example inputs for testing
+            float zoomInput = 0f; // Replace with real input if needed
+            Vector2 rotationInput = Vector2.zero; // Replace with real input if needed
+
+            UpdateCamera(Time.deltaTime, zoomInput, rotationInput);
+        }
+
         public void UpdateCamera(float deltaTime, float zoomInput, Vector2 rotationInput)
         {
-            if (FollowTransform == null) return;
+            if (FollowTransform == null)
+            {
+                Debug.LogWarning("FollowTransform is not assigned. Camera cannot follow.");
+                return;
+            }
 
             // Handle input inversion
             if (InvertX) rotationInput.x *= -1f;
@@ -73,16 +97,29 @@ namespace KinematicCharacterController
             _planarDirection = Vector3.Cross(FollowTransform.up, Vector3.Cross(_planarDirection, FollowTransform.up)).normalized;
 
             _targetVerticalAngle = Mathf.Clamp(_targetVerticalAngle - rotationInput.y * RotationSpeed, MinVerticalAngle, MaxVerticalAngle);
-            Quaternion planarRotation = Quaternion.LookRotation(_planarDirection, FollowTransform.up);
-            Quaternion verticalRotation = Quaternion.Euler(_targetVerticalAngle, 0f, 0f);
-            Quaternion targetRotation = Quaternion.Slerp(transform.rotation, planarRotation * verticalRotation, 1f - Mathf.Exp(-RotationSharpness * deltaTime));
-            transform.rotation = targetRotation;
+//            Quaternion planarRotation = Quaternion.LookRotation(_planarDirection, FollowTransform.up);
+  //          Quaternion verticalRotation = Quaternion.Euler(_targetVerticalAngle, 0f, 0f);
+    //        Quaternion targetRotation = Quaternion.Slerp(transform.rotation, planarRotation * verticalRotation, 1f - Mathf.Exp(-RotationSharpness * deltaTime));
+      //      transform.rotation = targetRotation;
 
             // Update distance
             _targetDistance = Mathf.Clamp(_targetDistance + zoomInput * DistanceMovementSpeed, MinDistance, MaxDistance);
+            _currentDistance = Mathf.Clamp(_currentDistance, MinDistance, MaxDistance);
+
+            if (float.IsNaN(_currentDistance) || float.IsInfinity(_currentDistance))
+            {
+                Debug.LogError($"Invalid _currentDistance detected: {_currentDistance}. Resetting to DefaultDistance.");
+                _currentDistance = DefaultDistance;
+            }
 
             // Follow the target smoothly
             _currentFollowPosition = Vector3.Lerp(_currentFollowPosition, FollowTransform.position, 1f - Mathf.Exp(-FollowingSharpness * deltaTime));
+
+            if (float.IsNaN(_currentFollowPosition.x) || float.IsNaN(_currentFollowPosition.y) || float.IsNaN(_currentFollowPosition.z))
+            {
+                Debug.LogError($"Invalid _currentFollowPosition detected: {_currentFollowPosition}. Resetting to FollowTransform position.");
+                _currentFollowPosition = FollowTransform.position;
+            }
 
             // Handle obstructions
             float adjustedDistance = _targetDistance;
@@ -100,12 +137,27 @@ namespace KinematicCharacterController
                 _distanceIsObstructed = false;
             }
 
+            adjustedDistance = Mathf.Clamp(adjustedDistance, MinDistance, MaxDistance);
+
+            if (float.IsNaN(adjustedDistance) || float.IsInfinity(adjustedDistance))
+            {
+                Debug.LogError($"Invalid adjustedDistance detected: {adjustedDistance}. Resetting to DefaultDistance.");
+                adjustedDistance = DefaultDistance;
+            }
+
             _currentDistance = adjustedDistance;
 
             // Update position
             Vector3 targetPosition = _currentFollowPosition - (transform.forward * _currentDistance);
             targetPosition += transform.right * FollowPointFraming.x;
             targetPosition += transform.up * FollowPointFraming.y;
+
+            if (float.IsNaN(targetPosition.x) || float.IsNaN(targetPosition.y) || float.IsNaN(targetPosition.z))
+            {
+                Debug.LogError($"Invalid targetPosition detected: {targetPosition}. Resetting to _currentFollowPosition.");
+                targetPosition = _currentFollowPosition;
+            }
+
             transform.position = targetPosition;
         }
 
