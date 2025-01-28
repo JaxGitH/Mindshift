@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: 0281d691de6730041b89d7709bef29e6
+  productGUID: b8ae695e09236de489489aab4a66b007
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: Mindshift
+  productName: Mindshift_Dev
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -870,14 +870,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Mindshift
+  metroPackageName: Mindshift_Dev
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Mindshift
+  metroApplicationDescription: Mindshift_Dev
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -947,11 +947,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 0d86aa28-d396-4d49-9e5f-29be5adb26c3
+  cloudProjectId: d47774c7-b452-472a-a993-36f664eba246
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Mindshift 2025-01-25_09-07-58
-  organizationId: disco_jax
+  projectName: Mindshift_Dev
+  organizationId: jlgilmon1
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

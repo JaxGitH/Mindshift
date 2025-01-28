@@ -1,4 +1,5 @@
 using Mindshift;
+using System.Collections;
 using UnityEngine;
 using KinematicCharacterController;
 
@@ -13,6 +14,13 @@ public class B_PlayerController : MonoBehaviour, ICharacterController
     public B_KinematicCharacterMotor Motor;
     public Joystick Joystick;
 
+    [Header("Camera Settings")]
+    public Transform CameraTransform; // Assign the camera prefab here in the Inspector
+
+    [Header("Mantling Settings")]
+    public float MantleCheckDistance = 2.0f;
+    public float MantleHeightOffset = 1.5f;
+
     [Header("Player State")]
     public bool IsAlive = true;
 
@@ -21,15 +29,28 @@ public class B_PlayerController : MonoBehaviour, ICharacterController
 
     private void Start()
     {
+        // Initialize KinematicCharacterMotor
         if (Motor == null)
         {
             Motor = GetComponent<B_KinematicCharacterMotor>();
         }
         Motor.CharacterController = this;
 
+        // Check for Joystick reference
         if (Joystick == null)
         {
             Debug.LogError("Joystick reference not assigned!");
+        }
+
+        // Assign the camera to follow the Player
+        B_CharacterCamera characterCamera = FindObjectOfType<B_CharacterCamera>();
+        if (characterCamera != null)
+        {
+            characterCamera.SetFollowTransform(this.transform);
+        }
+        else
+        {
+            Debug.LogError("Character Camera not found!");
         }
     }
 
@@ -37,49 +58,69 @@ public class B_PlayerController : MonoBehaviour, ICharacterController
     {
         if (!IsAlive)
         {
-            // Disable input and movement if the player is dead
             _moveInput = Vector3.zero;
             return;
         }
 
         HandleInput();
+
+        // Check for mantling logic
+        if (Motor.CheckForMantle(out Vector3 mantleTarget))
+        {
+            StartCoroutine(PerformMantle(mantleTarget));
+        }
     }
 
     private void HandleInput()
     {
-        // Check for keyboard input
+        // Keyboard input
         float keyboardHorizontal = Input.GetAxis("Horizontal");
-//        float keyboardVertical = Input.GetAxis("Vertical");
 
-        // Check for joystick input
+        // Joystick input
         float joystickHorizontal = Joystick != null ? Joystick.Horizontal : 0f;
-//        float joystickVertical = Joystick != null ? Joystick.Vertical : 0f;
 
-        // Combine inputs, prioritizing joystick if available
+        // Combine inputs, prioritize joystick if available
         float horizontal = Mathf.Abs(joystickHorizontal) > Mathf.Epsilon ? joystickHorizontal : keyboardHorizontal;
-//        float vertical = Mathf.Abs(joystickVertical) > Mathf.Epsilon ? joystickVertical : keyboardVertical;
 
         _moveInput = new Vector3(horizontal, 0f, 0f).normalized;
 
-        // Gather sprint input
+        // Sprinting logic
         _isSprinting = Input.GetKey(KeyCode.LeftShift);
     }
 
-    public void BeforeCharacterUpdate(float deltaTime)
+    private IEnumerator PerformMantle(Vector3 mantleTarget)
     {
-        // Custom logic before character updates (if needed)
+        Debug.Log($"Starting mantle to {mantleTarget}");
+
+        // Disable collision solving during mantling
+        Motor.SetMovementCollisionsSolvingActivation(false);
+
+        Vector3 startPosition = transform.position;
+        float mantleDuration = 0.5f;
+        float elapsed = 0f;
+
+        while (elapsed < mantleDuration)
+        {
+            elapsed += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPosition, mantleTarget, elapsed / mantleDuration);
+            yield return null;
+        }
+
+        // Final position alignment
+        transform.position = mantleTarget;
+        Motor.SetMovementCollisionsSolvingActivation(true);
+
+        Debug.Log("Mantle completed!");
     }
 
-    public void AfterCharacterUpdate(float deltaTime)
-    {
-        // Custom logic after character updates (if needed)
-    }
+    public void BeforeCharacterUpdate(float deltaTime) { }
+
+    public void AfterCharacterUpdate(float deltaTime) { }
 
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
     {
         if (_moveInput.sqrMagnitude > 0f)
         {
-            // Rotate towards movement direction
             Quaternion targetRotation = Quaternion.LookRotation(_moveInput, Vector3.up);
             currentRotation = Quaternion.Slerp(currentRotation, targetRotation, RotationSpeed * deltaTime);
         }
@@ -93,51 +134,40 @@ public class B_PlayerController : MonoBehaviour, ICharacterController
             return;
         }
 
-        // Determine target speed
+        // Determine speed
         float targetSpeed = _isSprinting ? SprintSpeed : WalkSpeed;
 
-        // Calculate movement direction in the local space of the motor
+        // Apply movement direction and speed
         Vector3 targetVelocity = _moveInput * targetSpeed;
-
-        // Apply velocity
         currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, deltaTime * 10f);
     }
 
     public void PostGroundingUpdate(float deltaTime)
     {
-        // Custom grounding logic if needed
+        // Placeholder for grounding logic if needed
+        // Debug.Log("PostGroundingUpdate called.");
     }
 
-    public bool IsColliderValidForCollisions(Collider coll)
-    {
-        // Example: Ignore specific colliders if necessary
-        return true;
-    }
+    public bool IsColliderValidForCollisions(Collider coll) => true;
 
-    public void OnGroundHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport)
-    {
-        // Handle ground hit logic (e.g., effects or sounds)
-    }
+    public void OnGroundHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport) { }
 
-    public void OnMovementHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport)
-    {
-        // Handle movement hit logic (e.g., collision effects)
-    }
+    public void OnMovementHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport) { }
 
-    public void ProcessHitStabilityReport(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, Vector3 atCharacterPosition, Quaternion atCharacterRotation, ref HitStabilityReport hitStabilityReport)
-    {
-        // Process stability report if needed
-    }
+    public void ProcessHitStabilityReport(
+        Collider hitCollider,
+        Vector3 hitNormal,
+        Vector3 hitPoint,
+        Vector3 atCharacterPosition,
+        Quaternion atCharacterRotation,
+        ref HitStabilityReport hitStabilityReport)
+    { }
 
-    public void OnDiscreteCollisionDetected(Collider hitCollider)
-    {
-        // Handle discrete collisions if needed
-    }
+    public void OnDiscreteCollisionDetected(Collider hitCollider) { }
 
     public void Die()
     {
         IsAlive = false;
         Debug.Log("Player has died.");
-        // Additional logic for death (e.g., triggering animations, game over screen, etc.)
     }
 }

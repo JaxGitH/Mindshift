@@ -757,6 +757,32 @@ namespace KinematicCharacterController
             SetCapsuleDimensions(CapsuleRadius, CapsuleHeight, CapsuleYOffset);
         }
 
+        public bool CheckForMantle(out Vector3 mantleTarget)
+        {
+            mantleTarget = Vector3.zero;
+
+            // Define the origin of the raycast slightly above the character's feet
+            Vector3 rayOrigin = _transientPosition + Vector3.up * 0.5f;
+
+            // Perform a raycast to detect mantleable objects
+            if (Physics.Raycast(rayOrigin, _characterForward, out RaycastHit hit, 2.0f, CollidableLayers, QueryTriggerInteraction.Ignore))
+            {
+                // Check if the hit object has a B_Mantleable component
+                if (hit.collider.TryGetComponent<B_Mantleable>(out B_Mantleable mantleable))
+                {
+                    // Validate if the object is mantleable based on height and distance
+                    if (mantleable.IsMantleable(_transientPosition, _characterForward, out Vector3 calculatedTarget))
+                    {
+                        mantleTarget = calculatedTarget;
+                        Debug.Log($"Mantle detected: {hit.collider.name} at {mantleTarget}");
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// Update phase 1 is meant to be called after physics movers have calculated their velocities, but
         /// before they have simulated their goal positions/rotations. It is responsible for:
