@@ -3,19 +3,22 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Balloon
+  - AttachmentPoint
+  - Mantleable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Attachable
+  - Draggable
+  - Mantleable
+  - Ground
+  - Platform
   - 
   - 
   - 
