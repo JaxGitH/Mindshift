@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5139704031829675091}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4346179035810029171}
   - component: {fileID: 6964341120110564653}
   - component: {fileID: 2839883449028796203}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pf_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,6 +176,8 @@ MonoBehaviour:
   WalkSpeed: 5
   SprintSpeed: 10
   RotationSpeed: 10
+  Gravity: -9.81
+  JumpForce: 10
   Motor: {fileID: 6964341120110564653}
   Joystick: {fileID: 0}
   CameraTransform: {fileID: 4791350612580753031}
@@ -191,7 +193,7 @@ GameObject:
   - component: {fileID: 6971696698634615638}
   - component: {fileID: 1510506828159131106}
   - component: {fileID: 7498647765704061366}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1522061787606912645}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Meshes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4791350612580753031}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +339,7 @@ GameObject:
   - component: {fileID: 2188036800647538440}
   - component: {fileID: 6908648416166546581}
   - component: {fileID: 8555583063287188687}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}

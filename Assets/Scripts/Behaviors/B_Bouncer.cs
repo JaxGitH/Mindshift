@@ -1,40 +1,45 @@
-using KinematicCharacterController;
 using UnityEngine;
+using KinematicCharacterController;
 
 namespace Mindshift
 {
-    [RequireComponent(typeof(Collider))]
-    public class B_Bouncer : MonoBehaviour
+    [RequireComponent(typeof(PhysicsMover))]
+    public class B_BouncePad : MonoBehaviour, IMoverController
     {
         [Header("Bounce Settings")]
-        [SerializeField] private float bounceForce = 10f; // The force applied to the player
-        [SerializeField] private float bounceCooldown = 0.5f; // Time before the pad can bounce again
-        [SerializeField] private LayerMask bounceLayer; // Define which objects can be bounced
+        public float bounceForce = 30f;
+        public float bounceCooldown = 0.2f; // Prevents repeated bounces
+        public LayerMask playerLayer;
 
-        private float lastBounceTime = 0f;
+        private PhysicsMover physicsMover;
+        private float lastBounceTime;
+
+        private void Awake()
+        {
+            physicsMover = GetComponent<PhysicsMover>();
+            physicsMover.MoverController = this;
+        }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (Time.time < lastBounceTime + bounceCooldown)
-                return; // Prevent bouncing too frequently
+            if (Time.time - lastBounceTime < bounceCooldown) return; // Prevent double bounces
 
-            // Check if the colliding object has a KinematicCharacterMotor or Rigidbody
-            if (other.TryGetComponent<B_KinematicCharacterMotor>(out B_KinematicCharacterMotor characterMotor))
+            if ((playerLayer & (1 << other.gameObject.layer)) != 0)
             {
-                // Apply a vertical impulse to the character motor
-                characterMotor.BaseVelocity = new Vector3(characterMotor.BaseVelocity.x, bounceForce, characterMotor.BaseVelocity.z);
-                lastBounceTime = Time.time;
-                Debug.Log($"Bounced {other.name} upwards!");
-            }
-            else if (other.TryGetComponent<Rigidbody>(out Rigidbody rb))
-            {
-                if ((bounceLayer.value & (1 << rb.gameObject.layer)) > 0) // Ensure it's in the correct layer
+                if (other.TryGetComponent<B_KinematicCharacterMotor>(out B_KinematicCharacterMotor motor))
                 {
-                    rb.velocity = new Vector3(rb.velocity.x, bounceForce, rb.velocity.z);
+                    Debug.Log($"Bouncing {other.name} with force {bounceForce}");
+                    motor.BaseVelocity = new Vector3(motor.BaseVelocity.x, bounceForce, motor.BaseVelocity.z);
                     lastBounceTime = Time.time;
-                    Debug.Log($"Bounced {other.name} upwards!");
                 }
             }
+        }
+
+        public void UpdateMovement(out Vector3 goalPosition, out Quaternion goalRotation, float deltaTime)
+        {
+            // BouncePad should remain stationary
+            goalPosition = transform.position;
+            goalRotation = transform.rotation;
         }
     }
 }
