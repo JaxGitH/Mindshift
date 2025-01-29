@@ -9,40 +9,33 @@ public class B_PlayerController : MonoBehaviour, ICharacterController
     public float WalkSpeed = 5f;
     public float SprintSpeed = 10f;
     public float RotationSpeed = 10f;
+    public float Gravity = -9.81f;
+    public float JumpForce = 10f;
 
     [Header("References")]
     public B_KinematicCharacterMotor Motor;
     public Joystick Joystick;
-
-    [Header("Camera Settings")]
-    public Transform CameraTransform; // Assign the camera prefab here in the Inspector
-
-    [Header("Mantling Settings")]
-    public float MantleCheckDistance = 2.0f;
-    public float MantleHeightOffset = 1.5f;
+    public Transform CameraTransform;
 
     [Header("Player State")]
     public bool IsAlive = true;
-
     private Vector3 _moveInput;
     private bool _isSprinting;
+    private bool _isJumping;
 
     private void Start()
     {
-        // Initialize KinematicCharacterMotor
         if (Motor == null)
         {
             Motor = GetComponent<B_KinematicCharacterMotor>();
         }
         Motor.CharacterController = this;
 
-        // Check for Joystick reference
         if (Joystick == null)
         {
             Debug.LogError("Joystick reference not assigned!");
         }
 
-        // Assign the camera to follow the Player
         B_CharacterCamera characterCamera = FindObjectOfType<B_CharacterCamera>();
         if (characterCamera != null)
         {
@@ -56,43 +49,25 @@ public class B_PlayerController : MonoBehaviour, ICharacterController
 
     private void Update()
     {
-        if (!IsAlive)
-        {
-            _moveInput = Vector3.zero;
-            return;
-        }
+        if (!IsAlive) return;
 
         HandleInput();
 
-        // Check for mantling logic
-        if (Motor.CheckForMantle(out Vector3 mantleTarget))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(PerformMantle(mantleTarget));
+            if (Motor.CheckForMantle(out Vector3 mantleTarget))
+            {
+                StartCoroutine(PerformMantle(mantleTarget));
+            }
+            else if (Motor.GroundingStatus.IsStableOnGround)
+            {
+                _isJumping = true;
+            }
         }
-    }
-
-    private void HandleInput()
-    {
-        // Keyboard input
-        float keyboardHorizontal = Input.GetAxis("Horizontal");
-
-        // Joystick input
-        float joystickHorizontal = Joystick != null ? Joystick.Horizontal : 0f;
-
-        // Combine inputs, prioritize joystick if available
-        float horizontal = Mathf.Abs(joystickHorizontal) > Mathf.Epsilon ? joystickHorizontal : keyboardHorizontal;
-
-        _moveInput = new Vector3(horizontal, 0f, 0f).normalized;
-
-        // Sprinting logic
-        _isSprinting = Input.GetKey(KeyCode.LeftShift);
     }
 
     private IEnumerator PerformMantle(Vector3 mantleTarget)
     {
-        Debug.Log($"Starting mantle to {mantleTarget}");
-
-        // Disable collision solving during mantling
         Motor.SetMovementCollisionsSolvingActivation(false);
 
         Vector3 startPosition = transform.position;
@@ -106,11 +81,19 @@ public class B_PlayerController : MonoBehaviour, ICharacterController
             yield return null;
         }
 
-        // Final position alignment
         transform.position = mantleTarget;
         Motor.SetMovementCollisionsSolvingActivation(true);
+    }
 
-        Debug.Log("Mantle completed!");
+    private void HandleInput()
+    {
+        float keyboardHorizontal = Input.GetAxis("Horizontal");
+        float joystickHorizontal = Joystick != null ? Joystick.Horizontal : 0f;
+
+        float horizontal = Mathf.Abs(joystickHorizontal) > Mathf.Epsilon ? joystickHorizontal : keyboardHorizontal;
+
+        _moveInput = new Vector3(horizontal, 0f, 0f).normalized;
+        _isSprinting = Input.GetKey(KeyCode.LeftShift);
     }
 
     public void BeforeCharacterUpdate(float deltaTime) { }
@@ -128,25 +111,29 @@ public class B_PlayerController : MonoBehaviour, ICharacterController
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
-        if (!IsAlive)
-        {
-            currentVelocity = Vector3.zero;
-            return;
-        }
+        if (!IsAlive) return;
 
-        // Determine speed
         float targetSpeed = _isSprinting ? SprintSpeed : WalkSpeed;
-
-        // Apply movement direction and speed
         Vector3 targetVelocity = _moveInput * targetSpeed;
-        currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, deltaTime * 10f);
+
+        if (Motor.GroundingStatus.IsStableOnGround)
+        {
+            currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, deltaTime * 10f);
+            _isJumping = false;
+        }
+        else
+        {
+            currentVelocity.y += Gravity * deltaTime;
+
+            if (_isJumping)
+            {
+                currentVelocity.y = JumpForce;
+                _isJumping = false;
+            }
+        }
     }
 
-    public void PostGroundingUpdate(float deltaTime)
-    {
-        // Placeholder for grounding logic if needed
-        // Debug.Log("PostGroundingUpdate called.");
-    }
+    public void PostGroundingUpdate(float deltaTime) { }
 
     public bool IsColliderValidForCollisions(Collider coll) => true;
 
@@ -154,14 +141,7 @@ public class B_PlayerController : MonoBehaviour, ICharacterController
 
     public void OnMovementHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, ref HitStabilityReport hitStabilityReport) { }
 
-    public void ProcessHitStabilityReport(
-        Collider hitCollider,
-        Vector3 hitNormal,
-        Vector3 hitPoint,
-        Vector3 atCharacterPosition,
-        Quaternion atCharacterRotation,
-        ref HitStabilityReport hitStabilityReport)
-    { }
+    public void ProcessHitStabilityReport(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint, Vector3 atCharacterPosition, Quaternion atCharacterRotation, ref HitStabilityReport hitStabilityReport) { }
 
     public void OnDiscreteCollisionDetected(Collider hitCollider) { }
 

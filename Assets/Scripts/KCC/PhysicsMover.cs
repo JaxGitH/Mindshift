@@ -244,7 +244,11 @@ namespace KinematicCharacterController
         /// </summary>
         public void VelocityUpdate(float deltaTime)
         {
-            InitialSimulationPosition = TransientPosition;
+            if (MoverController == null)
+            {
+                Debug.LogError($"{gameObject.name} has a PhysicsMover but no assigned MoverController!");
+                return;
+            }
             InitialSimulationRotation = TransientRotation;
 
             MoverController.UpdateMovement(out _internalTransientPosition, out _internalTransientRotation, deltaTime);
