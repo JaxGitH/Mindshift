@@ -158,34 +158,19 @@ namespace KinematicCharacterController
     {
 #pragma warning disable 0414
         [Header("Components")]
-        /// <summary>
-        /// The capsule collider of this motor
-        /// </summary>
         [ReadOnly]
         public CapsuleCollider Capsule;
 
         [Header("Capsule Settings")]
-        /// <summary>
-        /// Radius of the character's capsule
-        /// </summary>
         [SerializeField]
         [Tooltip("Radius of the Character Capsule")]
         private float CapsuleRadius = 0.5f;
-        /// <summary>
-        /// Height of the character's capsule
-        /// </summary>
         [SerializeField]
         [Tooltip("Height of the Character Capsule")]
         private float CapsuleHeight = 2f;
-        /// <summary>
-        /// Local y position of the character's capsule center
-        /// </summary>
         [SerializeField]
         [Tooltip("Height of the Character Capsule")]
         private float CapsuleYOffset = 1f;
-        /// <summary>
-        /// Physics material of the character's capsule
-        /// </summary>
         [SerializeField]
         [Tooltip("Physics material of the Character Capsule (Does not affect character movement. Only affects things colliding with it)")]
 #pragma warning disable 0649
