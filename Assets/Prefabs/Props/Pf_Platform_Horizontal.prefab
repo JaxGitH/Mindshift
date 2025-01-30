@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 2346817978383883187}
   - component: {fileID: 1034660637571457839}
   - component: {fileID: 2979590374257258615}
-  - component: {fileID: 5232344647917604542}
-  - component: {fileID: 6177599237893667406}
-  - component: {fileID: 7741818030218542037}
+  - component: {fileID: 4574264830264135896}
+  - component: {fileID: 893047228369646556}
+  - component: {fileID: 6330149758830947243}
   m_Layer: 9
   m_Name: Pf_Platform_Horizontal
   m_TagString: Mantleable
@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 8759948303373074718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 22.34, y: 0.06, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -361,7 +361,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5232344647917604542
+--- !u!114 &4574264830264135896
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -370,31 +370,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 8759948303373074718}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf5e9848d1f13b844a6e381e6062f18d, type: 3}
+  m_Script: {fileID: 11500000, guid: f9cb1f3aa822eab43aaeaddad7ea8a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mantleHeight: 0.5
-  mantleDistance: 1.5
-  mantleOffset: {x: 1.5, y: 0.25, z: 0}
---- !u!114 &6177599237893667406
-MonoBehaviour:
+  objectColor: {r: 0.7924528, g: 0.15325737, b: 0.15325737, a: 1}
+--- !u!65 &893047228369646556
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8759948303373074718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b32e6ef849fdcf4f8e0b604452bd633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveDistance: 10
-  moveTime: 5
-  waitTime: 1
-  allowedRiderLayers:
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
---- !u!114 &7741818030218542037
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000002, y: 0.25, z: 3.0000007}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6330149758830947243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -403,8 +404,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8759948303373074718}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 075ccbe9837b0744985e09ba3f015b9b, type: 3}
+  m_Script: {fileID: 11500000, guid: a70e9f453ac42b84798c8f5ba30f950e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 2979590374257258615}
-  MoveWithPhysics: 1
+  movementOffsetX: 5
+  speed: 2
+  waitTime: 1
