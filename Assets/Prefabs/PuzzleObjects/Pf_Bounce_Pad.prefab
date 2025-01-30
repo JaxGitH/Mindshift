@@ -12,11 +12,13 @@ GameObject:
   - component: {fileID: 4321772681961707614}
   - component: {fileID: 1966379182448573365}
   - component: {fileID: 6677396519696994658}
-  - component: {fileID: 7223895654157296345}
+  - component: {fileID: 822609599504527321}
   - component: {fileID: 7577604898649902196}
   - component: {fileID: 5241903974869298453}
   - component: {fileID: 4297507848020756838}
-  - component: {fileID: 6349904645625715356}
+  - component: {fileID: 8474415513384378490}
+  - component: {fileID: 5377174591077893280}
+  - component: {fileID: 4081247593144311886}
   m_Layer: 6
   m_Name: Pf_Bounce_Pad
   m_TagString: Untagged
@@ -1400,7 +1402,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2079
+  m_VersionIndex: 2082
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1478,14 +1480,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7223895654157296345
-MeshCollider:
+--- !u!65 &822609599504527321
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3650756372777985845}
-  m_Material: {fileID: 13400000, guid: d39d9ab1088473743b2ab495e180427d, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1496,10 +1498,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 3
+  m_Size: {x: 1.2, y: 0.2, z: 1.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7577604898649902196
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1552,7 +1553,7 @@ MonoBehaviour:
   dragWeight: 1
   isResettable: 1
   physicMaterial: {fileID: 13400000, guid: d39d9ab1088473743b2ab495e180427d, type: 2}
---- !u!114 &6349904645625715356
+--- !u!114 &8474415513384378490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1561,13 +1562,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 3650756372777985845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 095184ebbe8e14840aab0c75d31f7f69, type: 3}
+  m_Script: {fileID: 11500000, guid: f9cb1f3aa822eab43aaeaddad7ea8a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBeAttached: 1
-  weight: 1
-  liftOffset: 0.5
-  attachmentPoint: {fileID: 113728226236578580}
+  objectColor: {r: 0, g: 0.8051772, b: 1, a: 1}
+--- !u!114 &5377174591077893280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3650756372777985845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf467e1dabbbcb44780a68d1ecda7bae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCollisionEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4081247593144311886}
+        m_TargetAssemblyTypeName: B_ForceInDirection, Assembly-CSharp
+        m_MethodName: ApplyForce
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4081247593144311886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3650756372777985845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7977f6ee7ebafc47b7a3b1f90d65990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 1, z: 0}
+  power: 15
+  forceType: 1
 --- !u!1 &4374175191086364607
 GameObject:
   m_ObjectHideFlags: 0
