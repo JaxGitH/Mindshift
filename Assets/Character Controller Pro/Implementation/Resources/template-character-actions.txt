@@ -1,0 +1,82 @@
+namespace Lightbug.CharacterControllerPro.Implementation
+{
+
+/// <summary>
+/// This struct contains all the inputs actions available for the character to interact with.
+/// </summary>
+[System.Serializable]
+public struct @struct-name@ 
+{
+    
+    // Bool actions
+@bool-actions-definitions@
+
+    // Float actions
+@float-actions-definitions@
+
+    // Vector2 actions
+@vector2-actions-definitions@
+
+    public static CharacterActions CreateDefaultActions()
+    {
+        var actions = new CharacterActions();
+        actions.InitializeActions();
+        return actions;
+    }
+
+    /// <summary>
+    /// Reset all the actions.
+    /// </summary>
+	public void Reset()
+	{
+@bool-actions-reset@
+@float-actions-reset@
+@vector2-actions-reset@
+	}
+
+    /// <summary>
+    /// Initializes all the actions by instantiate them. Each action will be instantiated with its specific type (Bool, Float or Vector2).
+    /// </summary>
+    public void InitializeActions()
+    {
+@bool-actions-new@
+@float-actions-new@
+@vector2-actions-new@
+    }
+
+    /// <summary>
+    /// Updates the values of all the actions based on the current input handler (human).
+    /// </summary>
+    public void SetValues( InputHandler inputHandler )
+    {
+        if( inputHandler == null )
+			return;
+        
+@bool-actions-setValue@
+@float-actions-setValue@
+@vector2-actions-setValue@
+    }
+
+    /// <summary>
+    /// Copies the values of all the actions from an existing set of actions.
+    /// </summary>
+    public void SetValues( CharacterActions characterActions )
+    {	
+@bool-actions-copyValue@
+@float-actions-copyValue@
+@vector2-actions-copyValue@
+    }
+
+    /// <summary>
+	/// Update all the actions internal states.
+	/// </summary>
+    public void Update( float dt )
+    {
+@bool-actions-update@
+    }
+
+
+}
+
+
+}
