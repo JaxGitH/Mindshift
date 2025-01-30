@@ -11,8 +11,9 @@ public class B_DragAndLink : B_Draggable
     {
         if (GetComponent<B_Draggable>() != null)
         {
-            GetComponent<B_Draggable>().enabled = false;
-            Debug.LogError("B_Draggable cannot be on the same object as B_DragAndLink");
+            
+            //GetComponent<B_Draggable>().enabled = false;
+            //Debug.LogError("B_Draggable cannot be on the same object as B_DragAndLink");
         }
     }
     private void OnCollisionEnter(Collision collision)
