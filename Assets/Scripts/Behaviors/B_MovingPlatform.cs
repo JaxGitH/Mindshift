@@ -8,6 +8,7 @@ namespace Mindshift
     {
         [Header("Movement Settings")]
         public float movementOffsetX = 5f; // Distance to move on the X-axis
+        public float movementOffsetY = 5f; // Distance to move on the X-axis
         public float speed = 2f; // Movement speed
         public float waitTime = 1f; // Time to wait before switching direction
 
@@ -21,7 +22,7 @@ namespace Mindshift
         private void Start()
         {
             startPosition = transform.position;
-            endPosition = startPosition + new Vector3(movementOffsetX, 0, 0);
+            endPosition = startPosition + new Vector3(movementOffsetX, movementOffsetY, 0);
             lastPosition = transform.position;
 
             // Ensure the platform has a Kinematic Rigidbody (required for CCP's dynamic ground system)

@@ -184,6 +184,10 @@ namespace Lightbug.CharacterControllerPro.Core
 
         [Condition("applyWeightToGround", ConditionAttribute.ConditionType.IsTrue, ConditionAttribute.VisibilityType.NotEditable)]
         public float weightGravity = CharacterConstants.DefaultGravity;
+        public bool gravityOn = true;
+        public bool isKinematic = false;
+        public float linearDrag = 0f;
+        public float angularDrag = 0f;
 
 
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -781,11 +785,11 @@ namespace Lightbug.CharacterControllerPro.Core
             //else
             //    CharacterCollisions = gameObject.AddComponent<CharacterCollisions3D>();
 
-            RigidbodyComponent.IsKinematic = false;
-            RigidbodyComponent.UseGravity = false;
+            RigidbodyComponent.IsKinematic = isKinematic;
+            RigidbodyComponent.UseGravity = gravityOn;
             RigidbodyComponent.Mass = CharacterBody.Mass;
-            RigidbodyComponent.LinearDrag = 0f;
-            RigidbodyComponent.AngularDrag = 0f;
+            RigidbodyComponent.LinearDrag = linearDrag;
+            RigidbodyComponent.AngularDrag = angularDrag;
             RigidbodyComponent.Constraints = RigidbodyConstraints.FreezeRotation;
 
             // Ground trigger
