@@ -1,6 +1,6 @@
 using UnityEngine;
 //This script is for the FrontEnd scene.
-//Last update: 1/30/2025
+//Last update: 1/30/25
 public class FrontEnd : MonoBehaviour
 {
     public void OnPlayPressed()
