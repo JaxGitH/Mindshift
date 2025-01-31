@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+//This script lets you back out from the Level Select.
+//Last update: 1/30/2025
 public class SelectLevel : MonoBehaviour
 {
-    public void OnLevelPressed()
-    {
-        Debug.Log("Level pressed! WIP");
-    }
     public void OnReturnPressed()
     {
         Destroy(gameObject);
