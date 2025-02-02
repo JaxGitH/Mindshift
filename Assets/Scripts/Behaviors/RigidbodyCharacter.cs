@@ -38,7 +38,7 @@ public class RigidbodyCharacter : MonoBehaviour
 
     [Header("Ground Detection")]
     [SerializeField] private float groundCheckDistance = 0.2f;
-    [SerializeField] private LayerMask groundLayer = ~0;
+    [SerializeField] private LayerMask groundLayer;
 
     [Header("Step Handling")]
     [SerializeField] private float stepHeight = 0.5f;
@@ -49,7 +49,7 @@ public class RigidbodyCharacter : MonoBehaviour
     [SerializeField, Range(1f, 89f)] private float slopeLimit = 55f;
 
     [Header("Moving Platform Support")]
-    [SerializeField] private LayerMask dynamicGroundLayerMask = ~0;
+    [SerializeField] private LayerMask dynamicGroundLayerMask;
 
     [Header("Camera")]
     [SerializeField] private Transform cameraTransform;
