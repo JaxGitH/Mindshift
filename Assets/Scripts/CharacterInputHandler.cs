@@ -4,7 +4,7 @@ using Lightbug.CharacterControllerPro.Core;
 
 public class CharacterInputHandler : MonoBehaviour
 {
-    private CharacterActor characterActor;
+    [SerializeField] private CharacterActor characterActor;
     [SerializeField] private RigidbodyCharacter character;
     public Joystick joystick;  // On-screen joystick reference
     public float moveSpeed = 5f;
@@ -42,10 +42,11 @@ public class CharacterInputHandler : MonoBehaviour
         {
             character.MoveCharacter(horizontalInput, 0);
         }
-
-        // Apply movement to CharacterActor
-        if (characterActor == null) return;
         characterActor.Velocity = new Vector3(movementDirection.x, characterActor.Velocity.y, movementDirection.z);
+        // Apply movement to CharacterActor
+        Debug.Log(moveInput);
+        if (characterActor == null) return;
+       
 
 
         // Jump Handling
