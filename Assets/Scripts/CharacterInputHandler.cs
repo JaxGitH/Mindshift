@@ -44,7 +44,7 @@ public class CharacterInputHandler : MonoBehaviour
         }
         characterActor.Velocity = new Vector3(movementDirection.x, characterActor.Velocity.y, movementDirection.z);
         // Apply movement to CharacterActor
-        Debug.Log(moveInput);
+        
         if (characterActor == null) return;
        
 
