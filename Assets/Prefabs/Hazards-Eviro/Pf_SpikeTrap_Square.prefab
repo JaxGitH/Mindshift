@@ -17,6 +17,9 @@ GameObject:
   - component: {fileID: 5928034110045103349}
   - component: {fileID: 3323128839100462645}
   - component: {fileID: 690366683922012269}
+  - component: {fileID: -7839846074830478287}
+  - component: {fileID: 5795459649898748621}
+  - component: {fileID: 7432986511529974931}
   m_Layer: 6
   m_Name: Pf_SpikeTrap_Square
   m_TagString: Untagged
@@ -397,6 +400,99 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectColor: {r: 0.8679245, g: 0.2251691, b: 0.8196266, a: 1}
+--- !u!54 &-7839846074830478287
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515538331426904647}
+  serializedVersion: 4
+  m_Mass: 3
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!136 &5795459649898748621
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515538331426904647}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7432986511529974931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515538331426904647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c0b34564c84054a8e4aed4e49c2c32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interpolation: 0
+  collisionDetectionMode: 0
+  freezePosition:
+    x: 0
+    y: 0
+    z: 0
+  isKinematic: 0
+  mass: 3
+  linearDrag: 0
+  angularDrag: 0.05
+  moveSpeed: 5
+  rotateForwardDirection: 1
+  rotationSpeed: 10
+  allowAirControl: 1
+  airControlFactor: 0.1
+  gravityOn: 1
+  gravityScale: 2
+  jumpForce: 7
+  groundCheckCooldown: 0.2
+  groundCheckDistance: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  stepHeight: 0.5
+  stepCheckDistance: 0.5
+  stepSmooth: 0.1
+  slopeLimit: 55
+  dynamicGroundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  cameraTransform: {fileID: 0}
 --- !u!1 &7162499398729846869
 GameObject:
   m_ObjectHideFlags: 0
