@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class B_DragAndLink : B_Draggable
 {
-    [SerializeField] RigidbodyEvent RbEvent;
+/*    [SerializeField] RigidbodyEvent RbEvent;
     [SerializeField] float breakForce = 500;
     [SerializeField] float breakTorque = 500;
 
@@ -46,5 +46,5 @@ public class B_DragAndLink : B_Draggable
         }
 
         RbEvent.Invoke(targetRb);
-    }
+    } */
 }
