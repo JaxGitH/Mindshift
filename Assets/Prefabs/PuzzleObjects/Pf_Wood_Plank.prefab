@@ -166,35 +166,31 @@ MonoBehaviour:
   - m_Vertices: 0b0000000e00000012000000
   m_SharedTextures: []
   m_Positions:
-  - {x: -0.5, y: -0.125, z: 1.1}
-  - {x: 0.5, y: -0.125, z: 1.1}
-  - {x: -0.5, y: 0.125, z: 1.1}
-  - {x: 0.5, y: 0.125, z: 1.1}
-  - {x: 0.5, y: -0.125, z: 1.1}
-  - {x: 0.5, y: -0.125, z: -1.1}
-  - {x: 0.5, y: 0.125, z: 1.1}
-  - {x: 0.5, y: 0.125, z: -1.1}
-  - {x: 0.5, y: -0.125, z: -1.1}
-  - {x: -0.5, y: -0.125, z: -1.1}
-  - {x: 0.5, y: 0.125, z: -1.1}
-  - {x: -0.5, y: 0.125, z: -1.1}
-  - {x: -0.5, y: -0.125, z: -1.1}
-  - {x: -0.5, y: -0.125, z: 1.1}
-  - {x: -0.5, y: 0.125, z: -1.1}
-  - {x: -0.5, y: 0.125, z: 1.1}
-  - {x: -0.5, y: 0.125, z: 1.1}
-  - {x: 0.5, y: 0.125, z: 1.1}
-  - {x: -0.5, y: 0.125, z: -1.1}
-  - {x: 0.5, y: 0.125, z: -1.1}
-  - {x: -0.5, y: -0.125, z: -1.1}
-  - {x: 0.5, y: -0.125, z: -1.1}
-  - {x: -0.5, y: -0.125, z: 1.1}
-  - {x: 0.5, y: -0.125, z: 1.1}
+  - {x: -1.1, y: -0.125, z: 0.5}
+  - {x: 1.1, y: -0.125, z: 0.5}
+  - {x: -1.1, y: 0.125, z: 0.5}
+  - {x: 1.1, y: 0.125, z: 0.5}
+  - {x: 1.1, y: -0.125, z: 0.5}
+  - {x: 1.1, y: -0.125, z: -0.5}
+  - {x: 1.1, y: 0.125, z: 0.5}
+  - {x: 1.1, y: 0.125, z: -0.5}
+  - {x: 1.1, y: -0.125, z: -0.5}
+  - {x: -1.1, y: -0.125, z: -0.5}
+  - {x: 1.1, y: 0.125, z: -0.5}
+  - {x: -1.1, y: 0.125, z: -0.5}
+  - {x: -1.1, y: -0.125, z: -0.5}
+  - {x: -1.1, y: -0.125, z: 0.5}
+  - {x: -1.1, y: 0.125, z: -0.5}
+  - {x: -1.1, y: 0.125, z: 0.5}
+  - {x: -1.1, y: 0.125, z: 0.5}
+  - {x: 1.1, y: 0.125, z: 0.5}
+  - {x: -1.1, y: 0.125, z: -0.5}
+  - {x: 1.1, y: 0.125, z: -0.5}
+  - {x: -1.1, y: -0.125, z: -0.5}
+  - {x: 1.1, y: -0.125, z: -0.5}
+  - {x: -1.1, y: -0.125, z: 0.5}
+  - {x: 1.1, y: -0.125, z: 0.5}
   m_Textures0:
-  - {x: 0.5, y: -0.125}
-  - {x: -0.5, y: -0.125}
-  - {x: 0.5, y: 0.125}
-  - {x: -0.5, y: 0.125}
   - {x: 1.1, y: -0.125}
   - {x: -1.1, y: -0.125}
   - {x: 1.1, y: 0.125}
@@ -207,14 +203,18 @@ MonoBehaviour:
   - {x: -1.1, y: -0.125}
   - {x: 1.1, y: 0.125}
   - {x: -1.1, y: 0.125}
-  - {x: -0.5, y: 1.1}
-  - {x: 0.5, y: 1.1}
-  - {x: -0.5, y: -1.1}
-  - {x: 0.5, y: -1.1}
-  - {x: 0.5, y: -1.1}
-  - {x: -0.5, y: -1.1}
-  - {x: 0.5, y: 1.1}
-  - {x: -0.5, y: 1.1}
+  - {x: 0.5, y: -0.125}
+  - {x: -0.5, y: -0.125}
+  - {x: 0.5, y: 0.125}
+  - {x: -0.5, y: 0.125}
+  - {x: -1.1, y: 0.5}
+  - {x: 1.1, y: 0.5}
+  - {x: -1.1, y: -0.5}
+  - {x: 1.1, y: -0.5}
+  - {x: 1.1, y: -0.5}
+  - {x: -1.1, y: -0.5}
+  - {x: 1.1, y: 0.5}
+  - {x: -1.1, y: 0.5}
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1914
+  m_VersionIndex: 1958
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -270,14 +270,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Shape:
     rid: 7665702166759735308
-  m_Size: {x: 1, y: 0.25, z: 2.2}
+  m_Size: {x: 2.2, y: 0.25, z: 1}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_PivotLocation: 0
   m_PivotPosition: {x: 0, y: 0, z: 0}
-  m_UnmodifiedMeshVersion: 1911
+  m_UnmodifiedMeshVersion: 1958
   m_ShapeBox:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.5, y: 0.125, z: 1.1}
+    m_Extent: {x: 1.1, y: 0.125, z: 0.5}
   references:
     version: 2
     RefIds:
@@ -345,7 +345,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0000002, y: 0.25, z: 2.2000005}
+  m_Size: {x: 2.201, y: 0.25, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &2361691577982939684
 MeshFilter:
@@ -394,11 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e618385d73e5aa243b15e2e95934616f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dragHoldTime: 0
-  longPressThreshold: 1
-  dragWeight: 1
   isResettable: 1
-  physicMaterial: {fileID: 0}
 --- !u!114 &733228354749016416
 MonoBehaviour:
   m_ObjectHideFlags: 0
