@@ -29,6 +29,13 @@ public class B_Link : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (isAttached)
+        {
+            Debug.Log($"Balloon is attached to {joint.connectedBody.gameObject.name}");
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (isAttached) return; // Prevent multiple attachments
