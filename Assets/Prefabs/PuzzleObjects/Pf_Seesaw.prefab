@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8323566541319805931}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pf_Seesaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7940411724105145112}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AttachPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 1147095637355323297}
   - component: {fileID: 5602102484840503383}
   - component: {fileID: 690641518020230025}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8755,7 +8755,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6529439202934571148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AttachPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8793,7 +8793,7 @@ GameObject:
   - component: {fileID: 7267350655370849466}
   - component: {fileID: 685183387062065477}
   - component: {fileID: 3871552880801697764}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9082,7 +9082,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: 2100000, guid: ad68d68f4590da24799fae972de0d7f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

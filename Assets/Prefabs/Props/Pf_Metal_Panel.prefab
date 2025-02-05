@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3997774996192436445
+--- !u!1 &3509764830889090344
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2762794720112163702}
-  - component: {fileID: 1702181659757407445}
-  - component: {fileID: 7499979328705562249}
+  - component: {fileID: 87121037907084716}
+  - component: {fileID: 5603162543627181800}
+  - component: {fileID: 3068191039900979365}
   m_Layer: 0
-  m_Name: Mesh_Teleporter
+  m_Name: Mesh_MetalPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2762794720112163702
+--- !u!4 &87121037907084716
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3997774996192436445}
+  m_GameObject: {fileID: 3509764830889090344}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.50000024, y: -0.49999985, z: -0.4999998, w: 0.50000024}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5092838178330021450}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
---- !u!33 &1702181659757407445
+  m_Father: {fileID: 8559709757434276686}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5603162543627181800
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3997774996192436445}
-  m_Mesh: {fileID: -3416350482362302066, guid: 20dfc6d28efbb18479853bbfd4c7b469, type: 3}
---- !u!23 &7499979328705562249
+  m_GameObject: {fileID: 3509764830889090344}
+  m_Mesh: {fileID: -1496856564275559902, guid: e16d6bc2bfae0fd43b8789f30ba3107b, type: 3}
+--- !u!23 &3068191039900979365
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3997774996192436445}
+  m_GameObject: {fileID: 3509764830889090344}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 10fc22d0668404041bdfd9cfb0fd3f0a, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,7 +83,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &7027980562145765105
+--- !u!1 &6460189726396722671
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,27 +91,27 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5092838178330021450}
+  - component: {fileID: 8559709757434276686}
   m_Layer: 0
-  m_Name: Pf_Teleporter
+  m_Name: Pf_Metal_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5092838178330021450
+--- !u!4 &8559709757434276686
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7027980562145765105}
+  m_GameObject: {fileID: 6460189726396722671}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2762794720112163702}
+  - {fileID: 87121037907084716}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
