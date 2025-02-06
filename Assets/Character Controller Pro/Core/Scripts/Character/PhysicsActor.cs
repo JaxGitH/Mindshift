@@ -264,21 +264,15 @@ namespace Lightbug.CharacterControllerPro.Core
         /// </summary>
         public void Teleport(Vector3 position, Quaternion rotation)
         {
-            Debug.Log($"[PhysicsActor] Teleporting to: {position}");
-
-            // Directly override Transform position
-            transform.position = position;
-
-            // Apply to PhysicsActor properties
             Position = position;
             Rotation = rotation;
-            Velocity = Vector3.zero; // Reset velocity
 
             ResetInterpolationPosition();
             ResetInterpolationRotation();
 
             OnTeleport?.Invoke(Position, Rotation);
         }
+
         /// <summary>
         /// Gets the current up direction based on the rigidbody rotation (not necessarily transform.up).
         /// </summary>
