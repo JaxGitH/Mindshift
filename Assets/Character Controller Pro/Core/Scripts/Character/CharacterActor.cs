@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Lightbug.Utilities;
 using System.Runtime.CompilerServices;
+using System.Collections;
 
 namespace Lightbug.CharacterControllerPro.Core
 {
@@ -16,7 +17,7 @@ namespace Lightbug.CharacterControllerPro.Core
     [DefaultExecutionOrder(ExecutionOrder.CharacterActorOrder)]
     public class CharacterActor : PhysicsActor
     {
-        [Header("One way platforms")]        
+        [Header("One way platforms")]
 
         [Tooltip("One way platforms are objects that can be contacted by the character feet (bottom sphere) while descending.")]
         public LayerMask oneWayPlatformsLayerMask = 0;
@@ -28,7 +29,7 @@ namespace Lightbug.CharacterControllerPro.Core
         [Range(0f, 179f)]
         public float oneWayPlatformsValidArc = 175f;
 
-                
+
 
         [Header("Stability")]
 
@@ -189,6 +190,9 @@ namespace Lightbug.CharacterControllerPro.Core
         public float linearDrag = 0f;
         public float angularDrag = 0f;
 
+        [Header("Checkpoint Debugging")]
+        [SerializeField] private Vector3 lastCheckpointPos;
+        [SerializeField] private int lastCheckpointNum;
 
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -318,7 +322,7 @@ namespace Lightbug.CharacterControllerPro.Core
 
         #region Collision Properties
 
-        public LayerMask ObstaclesLayerMask => PhysicsComponent.CollisionLayerMask | oneWayPlatformsLayerMask; 
+        public LayerMask ObstaclesLayerMask => PhysicsComponent.CollisionLayerMask | oneWayPlatformsLayerMask;
         public LayerMask ObstaclesWithoutOWPLayerMask => PhysicsComponent.CollisionLayerMask & ~(oneWayPlatformsLayerMask);
 
 
@@ -429,7 +433,7 @@ namespace Lightbug.CharacterControllerPro.Core
         /// <summary>
         /// Gets the current stability state of the character. Stability is equal to "grounded + slope angle <= slope limit".
         /// </summary>
-        public bool IsStable { get; private set; }        
+        public bool IsStable { get; private set; }
 
         /// <summary>
         /// Returns true if the character is grounded onto an unstable ground, false otherwise.
@@ -823,7 +827,7 @@ namespace Lightbug.CharacterControllerPro.Core
             base.Start();
 
             // Initial OWP check
-            var filter = new HitInfoFilter(ObstaclesLayerMask, false, true, oneWayPlatformsLayerMask);            
+            var filter = new HitInfoFilter(ObstaclesLayerMask, false, true, oneWayPlatformsLayerMask);
             CharacterCollisions.CheckOverlap(
                 Position,
                 0f,
@@ -991,8 +995,39 @@ namespace Lightbug.CharacterControllerPro.Core
         /// </summary>
         public List<Contact> GroundContacts { get; private set; } = new List<Contact>(10);
 
+        public Vector3 lastCheckpointPosition { get; private set; }
+        public int lastCheckpointNumber { get; private set; } = -1;
 
+        public void SetCheckpoint(Vector3 position, int checkpointNumber)
+        {
+            if (checkpointNumber > lastCheckpointNumber)
+            {
+                lastCheckpointPosition = position;
+                lastCheckpointNumber = checkpointNumber;
 
+                lastCheckpointPos = lastCheckpointPosition;
+                lastCheckpointNum = lastCheckpointNumber;
+
+                Debug.Log("Checkpoint updated: " + checkpointNumber);
+            }
+        }
+
+        public void Respawn()
+        {
+            Debug.Log("Respawning at checkpoint: " + lastCheckpointPosition);
+            Teleport(lastCheckpointPosition);
+
+            // Extra safety check to force teleportation if needed
+            StartCoroutine(ForceTeleportAfterDelay());
+        }
+
+        private IEnumerator ForceTeleportAfterDelay()
+        {
+            yield return new WaitForSeconds(0.1f);
+            Debug.Log("Force Teleporting Again...");
+            transform.position = lastCheckpointPosition;
+            Position = lastCheckpointPosition;
+        }
         void GetContactsInformation()
         {
             bool wasCollidingWithWall = characterCollisionInfo.wallCollision;
@@ -1210,10 +1245,10 @@ namespace Lightbug.CharacterControllerPro.Core
             {
                 if (characterCollisionInfo.groundRigidbody3D == null)
                     return false;
-            }    
+            }
 
             return true;
-            
+
         }
 
         void SetDynamicGroundData(Vector3 position)
@@ -1677,7 +1712,7 @@ namespace Lightbug.CharacterControllerPro.Core
         /// <param name="filter">Filter used by the overlap function.</param>
         /// <returns>True if the overlap doesn't detect any obstacle.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool CheckSize(Vector3 position, Vector2 size, in HitInfoFilter filter) => 
+        public bool CheckSize(Vector3 position, Vector2 size, in HitInfoFilter filter) =>
             CharacterCollisions.CheckBodySize(size, position, in filter, _collisionHitFilter);
 
         /// <summary>
@@ -1753,7 +1788,7 @@ namespace Lightbug.CharacterControllerPro.Core
         /// <param name="sizeReferenceType">Anchor point used when changing the size.</param>
         /// <param name="filter"></param>
         /// <returns>True if the overlap doesn't detect any obstacle.</returns>
-        public bool CheckAndSetSize(Vector2 size, in HitInfoFilter filter, SizeReferenceType sizeReferenceType = SizeReferenceType.Bottom) => 
+        public bool CheckAndSetSize(Vector2 size, in HitInfoFilter filter, SizeReferenceType sizeReferenceType = SizeReferenceType.Bottom) =>
             CheckAndSetSize(Position, size, in filter, sizeReferenceType);
 
         /// <summary>
@@ -1768,7 +1803,7 @@ namespace Lightbug.CharacterControllerPro.Core
             return CheckAndSetSize(Position, size, in filter, sizeReferenceType);
         }
 
-        
+
         /// <summary>
         /// Performs an overlap test, and if the result is valid, it interpolates the size of the body from the current value to a 
         /// given target value.
@@ -1824,7 +1859,7 @@ namespace Lightbug.CharacterControllerPro.Core
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool CheckAndInterpolateHeight(float targetHeight, float lerpFactor, in HitInfoFilter filter, SizeReferenceType sizeReferenceType = SizeReferenceType.Bottom) =>
             CheckAndInterpolateSize(new Vector2(DefaultBodySize.x, targetHeight), lerpFactor, in filter, sizeReferenceType);
-        
+
         void SetColliderSize()
         {
             float verticalOffset = IsStable ? Mathf.Max(StepOffset, CharacterConstants.ColliderMinBottomOffset) : 0f;
@@ -1919,13 +1954,13 @@ namespace Lightbug.CharacterControllerPro.Core
 
                 if (contactSlopeAngle < slopeLimit && collisionInfo.edgeUpperSlopeAngle <= slopeLimit && collisionInfo.edgeLowerSlopeAngle <= slopeLimit)
                     return Up;
-                
+
                 if (collisionInfo.edgeUpperSlopeAngle <= slopeLimit)
                     return collisionInfo.edgeUpperNormal;
-                
+
                 if (collisionInfo.edgeLowerSlopeAngle <= slopeLimit)
                     return collisionInfo.edgeLowerNormal;
-                
+
                 return collisionInfo.hitInfo.normal;
             }
             else
@@ -1990,7 +2025,7 @@ namespace Lightbug.CharacterControllerPro.Core
             //    positionToContact.z = 0f;
 
             //float distanceToEdge = positionToContact.magnitude;  
-            
+
 
             if (CheckOneWayPlatformLayerMask(collisionInfo.hitInfo.layer))
             {
@@ -2065,7 +2100,7 @@ namespace Lightbug.CharacterControllerPro.Core
 
             if (IsStable)
                 Position = position;
-        }        
+        }
 
         /// <summary>
         /// Forces the character to abandon the grounded state (isGrounded = false). 
@@ -2087,7 +2122,7 @@ namespace Lightbug.CharacterControllerPro.Core
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        bool IsAStableEdge(CollisionInfo collisionInfo) => 
+        bool IsAStableEdge(CollisionInfo collisionInfo) =>
             collisionInfo.isAnEdge && collisionInfo.edgeUpperSlopeAngle <= slopeLimit;
 
         bool CollisionHitFilter(Transform hitTransform)
@@ -2455,7 +2490,7 @@ namespace Lightbug.CharacterControllerPro.Core
             IsGrounded = collisionInfo.hitInfo.hit;
             IsStable = false;
 
-            if (!IsGrounded)    
+            if (!IsGrounded)
                 return;
 
             if (!EvaluateGroundStability(characterCollisionInfo.groundObject.transform))
