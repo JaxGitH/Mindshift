@@ -1,0 +1,19 @@
+{
+    "name": "com.lightbug.character-controller-pro",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.modules.terrain",
+            "expression": "",
+            "define": "UNITY_TERRAIN_MODULE"
+        }
+    ],
+    "noEngineReferences": false
+}

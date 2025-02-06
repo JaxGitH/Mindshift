@@ -1,0 +1,7 @@
+Character Controller Pro's documentation is online. Please visit the following links:
+
+- User manual: 
+https://lightbug14.gitbook.io/ccp/
+
+- API Reference:
+https://lightbug14.github.io/lightbug-web/character-controller-pro/Documentation/html/index.html
