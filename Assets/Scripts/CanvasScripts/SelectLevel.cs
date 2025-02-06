@@ -5,6 +5,7 @@ public class SelectLevel : MonoBehaviour
 {
     public void OnReturnPressed()
     {
+        AudioManager.PlayEffect(eEffects.click);
         Destroy(gameObject);
     }
 }

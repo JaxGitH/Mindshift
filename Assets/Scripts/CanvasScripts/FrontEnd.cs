@@ -11,16 +11,19 @@ public class FrontEnd : MonoBehaviour
     public void OnPlayPressed()
     {
         //"OnPlayPressed()" is for the Play button in the main screen, and it'll load the World/Lab Select canvas.
+        AudioManager.PlayEffect(eEffects.click);
         CanvasManager.Instance.ShowSelectWorld();
     }
     public void OnOptionsPressed()
     {
         //"OnOptionsPressed()" displays the Options menu (CURRENTLY WIP)
+        AudioManager.PlayEffect(eEffects.click);
         Debug.Log("<color=yellow>Options pressed. WIP</color>");
     }
     public void OnExtrasPressed()
     {
         //"OnExtrasPressed()" displays the Extras menu (CURRENTLY WIP)
+        AudioManager.PlayEffect(eEffects.click);
         Debug.Log("<color=yellow>Extras pressed. WIP!</color>");
     }
 

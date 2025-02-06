@@ -34,7 +34,7 @@ public class AudioManager : MonoBehaviour
         volume[(int)_mixer] = _soundLevel;
     }
     //Call this method and the label of the sound effect in order to play it.
-    public static void PlayOneShot(eEffects _effect)
+    public static void PlayEffect(eEffects _effect)
     {
         Instance.Effects.PlayOneShot(GameManager.Instance.soundLibrary.effects[(int)_effect]);
     }
