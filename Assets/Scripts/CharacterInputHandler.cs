@@ -4,7 +4,7 @@ using Lightbug.CharacterControllerPro.Core;
 
 public class CharacterInputHandler : MonoBehaviour
 {
-    private CharacterActor characterActor;
+    [SerializeField] private CharacterActor characterActor;
     public Joystick joystick;  // On-screen joystick reference
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
@@ -12,11 +12,12 @@ public class CharacterInputHandler : MonoBehaviour
     private void Awake()
     {
         characterActor = GetComponent<CharacterActor>();
+        
+
     }
 
     private void FixedUpdate()
-    {
-        if (characterActor == null) return;
+    {               
 
         // Read joystick input (if joystick exists)
         float horizontalInput = joystick != null ? joystick.Horizontal : 0f;
@@ -32,8 +33,12 @@ public class CharacterInputHandler : MonoBehaviour
         // Convert 2D input into a 3D movement direction
         Vector3 movementDirection = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed;
 
-        // Apply movement to CharacterActor
         characterActor.Velocity = new Vector3(movementDirection.x, characterActor.Velocity.y, movementDirection.z);
+        // Apply movement to CharacterActor
+        
+        if (characterActor == null) return;
+       
+
 
         // Jump Handling
         if (Keyboard.current.spaceKey.wasPressedThisFrame)

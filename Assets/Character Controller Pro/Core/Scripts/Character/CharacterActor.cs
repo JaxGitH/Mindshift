@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Lightbug.Utilities;
 using System.Runtime.CompilerServices;
+using System.Collections;
 
 namespace Lightbug.CharacterControllerPro.Core
 {
@@ -189,6 +190,9 @@ namespace Lightbug.CharacterControllerPro.Core
         public float linearDrag = 0f;
         public float angularDrag = 0f;
 
+        [Header("Checkpoint Debugging")]
+        [SerializeField] private Vector3 lastCheckpointPos;
+        [SerializeField] private int lastCheckpointNum;
 
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -991,8 +995,39 @@ namespace Lightbug.CharacterControllerPro.Core
         /// </summary>
         public List<Contact> GroundContacts { get; private set; } = new List<Contact>(10);
 
+        public Vector3 lastCheckpointPosition { get; private set; }
+        public int lastCheckpointNumber { get; private set; } = -1;
 
+        public void SetCheckpoint(Vector3 position, int checkpointNumber)
+        {
+            if (checkpointNumber > lastCheckpointNumber)
+            {
+                lastCheckpointPosition = position;
+                lastCheckpointNumber = checkpointNumber;
 
+                lastCheckpointPos = lastCheckpointPosition;
+                lastCheckpointNum = lastCheckpointNumber;
+
+                Debug.Log("Checkpoint updated: " + checkpointNumber);
+            }
+        }
+
+        public void Respawn()
+        {
+            Debug.Log("Respawning at checkpoint: " + lastCheckpointPosition);
+            Teleport(lastCheckpointPosition);
+
+            // Extra safety check to force teleportation if needed
+            StartCoroutine(ForceTeleportAfterDelay());
+        }
+
+        private IEnumerator ForceTeleportAfterDelay()
+        {
+            yield return new WaitForSeconds(0.1f);
+            Debug.Log("Force Teleporting Again...");
+            transform.position = lastCheckpointPosition;
+            Position = lastCheckpointPosition;
+        }
         void GetContactsInformation()
         {
             bool wasCollidingWithWall = characterCollisionInfo.wallCollision;
