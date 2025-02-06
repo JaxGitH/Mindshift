@@ -1,85 +1,70 @@
 using UnityEngine;
 
-namespace Mindshift
+public class B_Draggable : MonoBehaviour
 {
-    public class B_Draggable : B_DragAndDrop
+    [Header("Draggable Settings")]
+    [SerializeField] private bool isResettable = true;
+    private Rigidbody rb;
+    public bool isDragging = false;
+    private Vector3 offset;
+
+    private void Start()
     {
-        [Header("Draggable Settings")]
-        [SerializeField] private bool isResettable = true;
-        [SerializeField] private PhysicMaterial physicMaterial; // Reference to the material
-
-        protected override void Start()
+        rb = GetComponent<Rigidbody>();
+        if (rb == null)
         {
-            base.Start();
-            UpdateFrictionBasedOnWeight();
+            Debug.LogError($"B_Draggable: No Rigidbody found on {gameObject.name}");
+            enabled = false;
         }
-        protected override void OnLongPress()
+    }
+
+    private void Update()
+    {
+        if (isDragging)
         {
-            base.OnLongPress();
+            DragObject();
         }
+    }
 
-        protected override void HandleMouseInput()
+    private void OnMouseDown()
+    {
+        StartDragging();
+    }
+
+    private void OnMouseUp()
+    {
+        StopDragging();
+    }
+
+    private void StartDragging()
+    {
+        if (rb != null)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit hit) && hit.transform == transform)
-                {
-                    isBeingDragged = true;
-                    objectRb.isKinematic = true; // Disable physics while dragging
-                    dragHoldTime = 0f;
-
-                    Debug.Log($"Started dragging {gameObject.name}");
-                }
-            }
-
-            if (Input.GetMouseButton(0) && isBeingDragged)
-            {
-                dragHoldTime += Time.deltaTime;
-
-                // Convert screen position to world position
-                Vector3 mousePosition = Input.mousePosition;
-                mousePosition.z = Camera.main.WorldToScreenPoint(transform.position).z; // Maintain current Z depth
-                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-                // Move the object directly to the cursor
-                transform.position = worldPosition;
-
-                if (dragHoldTime >= longPressThreshold)
-                {
-                    OnLongPress();
-                }
-            }
-
-            if (Input.GetMouseButtonUp(0) && isBeingDragged)
-            {
-                isBeingDragged = false;
-                objectRb.isKinematic = false; // Re-enable physics after dragging
-                Debug.Log($"Stopped dragging {gameObject.name}");
-            }
+            isDragging = true;
+            rb.isKinematic = true; // Temporarily disable physics for smooth dragging
+            offset = transform.position - GetMouseWorldPosition();
         }
+    }
 
-        public void SyncWeight(float weight)
+    private void StopDragging()
+    {
+        if (rb != null)
         {
-            dragWeight = weight;
-            UpdateFrictionBasedOnWeight();
-            Debug.Log($"Weight synchronized: {dragWeight}");
+            isDragging = false;
+            rb.isKinematic = false; // Re-enable physics when dropped
         }
+    }
 
-        private void UpdateFrictionBasedOnWeight()
-        {
-            if (physicMaterial != null)
-            {
-                float friction = Mathf.Clamp(dragWeight / 10f, 0.1f, 1.0f); // Scale friction with weight
-                physicMaterial.dynamicFriction = friction;
-                physicMaterial.staticFriction = friction;
-                Debug.Log($"Friction updated for {gameObject.name}: {friction}");
-            }
-        }
-        public void ResetPosition()
-        {
-            transform.position = Vector3.zero;
-            Debug.Log($"Object position reset to origin: {gameObject.name}");
-        }
+    private void DragObject()
+    {
+        Vector3 newPosition = GetMouseWorldPosition() + offset;
+        transform.position = newPosition;
+    }
+
+    private Vector3 GetMouseWorldPosition()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition.z = Camera.main.WorldToScreenPoint(transform.position).z;
+        return Camera.main.ScreenToWorldPoint(mousePosition);
     }
 }

@@ -18,7 +18,7 @@ public class B_DragAndLink : B_Draggable
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (!isBeingDragged)
+        if (!isDragging)
         {
             AttachToRigidbody(collision.rigidbody, collision.contacts[0].point);
         }
