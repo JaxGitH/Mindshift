@@ -9,7 +9,7 @@ public class B_ForceInDirection : MonoBehaviour
     [SerializeField] ForceMode forceType = ForceMode.Impulse;
 
 
-
+    
     public void ApplyForce(Rigidbody rb)
     {
         if (rb == null)
@@ -18,7 +18,7 @@ public class B_ForceInDirection : MonoBehaviour
         }
 
         if (forceType == ForceMode.Impulse) Upforce(rb);
-        else if (forceType == ForceMode.Force) ConstantForce(rb);
+        else if (forceType == ForceMode.Force)  ConstantForce(rb);
         else Debug.LogError("No method has been made for this ForceMode");
     }
     private void Upforce(Rigidbody _rb)
