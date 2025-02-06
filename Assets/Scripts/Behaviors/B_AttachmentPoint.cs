@@ -45,14 +45,14 @@ namespace Mindshift
             Transform otherParent = otherPoint.transform.parent;
 
             // Ensure the Balloon (B_Floating) is the parent
-            if (thisParent.TryGetComponent<B_Floating>(out _) && !otherParent.TryGetComponent<B_Floating>(out _))
+            if (thisParent.TryGetComponent<B_Float>(out _) && !otherParent.TryGetComponent<B_Float>(out _))
             {
                 // Balloon is the parent
                 Vector3 alignmentOffset = transform.position - thisParent.position;
                 thisParent.position = otherPoint.transform.position - alignmentOffset;
                 otherParent.SetParent(thisParent, worldPositionStays: true);
             }
-            else if (!thisParent.TryGetComponent<B_Floating>(out _) && otherParent.TryGetComponent<B_Floating>(out _))
+            else if (!thisParent.TryGetComponent<B_Float>(out _) && otherParent.TryGetComponent<B_Float>(out _))
             {
                 // The other object is a Balloon; reverse roles
                 Vector3 alignmentOffset = otherPoint.transform.position - otherParent.position;
