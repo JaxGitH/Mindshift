@@ -413,6 +413,7 @@ GameObject:
   - component: {fileID: 1050464807606572680}
   - component: {fileID: 5485326543083473164}
   - component: {fileID: 268212640809235216}
+  - component: {fileID: 8073773629937430171}
   m_Layer: 5
   m_Name: Button_Level5
   m_TagString: Untagged
@@ -534,6 +535,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8073773629937430171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423279910396163968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d767e302335127439f73886d62ddc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: 
 --- !u!1 &1490082640999090754
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,6 +746,7 @@ GameObject:
   - component: {fileID: 2557340097555341091}
   - component: {fileID: 6126663420017652934}
   - component: {fileID: 4631949794470575584}
+  - component: {fileID: 5328549064181525965}
   m_Layer: 5
   m_Name: Button_Level1
   m_TagString: Untagged
@@ -841,9 +856,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8897571617300596429}
-        m_TargetAssemblyTypeName: SelectLevel, Assembly-CSharp
-        m_MethodName: OnLevelPressed
+      - m_Target: {fileID: 5328549064181525965}
+        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
+        m_MethodName: OnButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -853,6 +868,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5328549064181525965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089201758043338992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d767e302335127439f73886d62ddc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: UILevel01
 --- !u!1 &2103543206811607820
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,6 +893,7 @@ GameObject:
   - component: {fileID: 6198194303096817774}
   - component: {fileID: 6613947793351696680}
   - component: {fileID: 2630903313176369305}
+  - component: {fileID: 7101407599080854931}
   m_Layer: 5
   m_Name: Button_Level8
   m_TagString: Untagged
@@ -986,6 +1015,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7101407599080854931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103543206811607820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d767e302335127439f73886d62ddc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: 
 --- !u!1 &2145192407675645133
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,6 +1040,7 @@ GameObject:
   - component: {fileID: 846666892196551667}
   - component: {fileID: 4376239614123276105}
   - component: {fileID: 6322187060149110949}
+  - component: {fileID: 5929547629741972070}
   m_Layer: 5
   m_Name: Button_Level3
   m_TagString: Untagged
@@ -1119,6 +1162,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5929547629741972070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145192407675645133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d767e302335127439f73886d62ddc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: 
 --- !u!1 &2987794631443857066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,6 +1397,7 @@ GameObject:
   - component: {fileID: 1979129399875674147}
   - component: {fileID: 4104941204629297292}
   - component: {fileID: 8403909757316601833}
+  - component: {fileID: 277663462940782948}
   m_Layer: 5
   m_Name: Button_Level7
   m_TagString: Untagged
@@ -1462,6 +1519,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &277663462940782948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3341606635216051058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d767e302335127439f73886d62ddc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: 
 --- !u!1 &3715609154138250300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,6 +1544,7 @@ GameObject:
   - component: {fileID: 4288113003256767294}
   - component: {fileID: 6229889722496823098}
   - component: {fileID: 6047685983294908556}
+  - component: {fileID: 4530879445231044943}
   m_Layer: 5
   m_Name: Button_Level2
   m_TagString: Untagged
@@ -1583,9 +1654,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8897571617300596429}
-        m_TargetAssemblyTypeName: SelectLevel, Assembly-CSharp
-        m_MethodName: OnLevelPressed
+      - m_Target: {fileID: 4530879445231044943}
+        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
+        m_MethodName: OnButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1595,6 +1666,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4530879445231044943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3715609154138250300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d767e302335127439f73886d62ddc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: UILevel02
 --- !u!1 &4171817884139976565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1741,6 +1825,7 @@ GameObject:
   - component: {fileID: 3277960313293743122}
   - component: {fileID: 5104333991036817795}
   - component: {fileID: 5670645680849391811}
+  - component: {fileID: 3842583115932203003}
   m_Layer: 5
   m_Name: Button_Level6
   m_TagString: Untagged
@@ -1862,6 +1947,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3842583115932203003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4539940831464261852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d767e302335127439f73886d62ddc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: 
 --- !u!1 &6677789133620335306
 GameObject:
   m_ObjectHideFlags: 0
@@ -2621,6 +2719,7 @@ GameObject:
   - component: {fileID: 4007156433008837994}
   - component: {fileID: 7931604484405170941}
   - component: {fileID: 1920825451910029368}
+  - component: {fileID: 902980718643035906}
   m_Layer: 5
   m_Name: Button_Level4
   m_TagString: Untagged
@@ -2742,6 +2841,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &902980718643035906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8588183839142363728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d767e302335127439f73886d62ddc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: 
 --- !u!1 &8737772351916892389
 GameObject:
   m_ObjectHideFlags: 0
