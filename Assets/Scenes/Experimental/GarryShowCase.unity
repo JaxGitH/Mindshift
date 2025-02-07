@@ -13409,6 +13409,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 418179889436688123, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 418179889436688123, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 418179889436688123, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 1130502960088706054, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
       propertyPath: joystick
       value: 
@@ -13455,7 +13467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7332918590725698487, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
       propertyPath: alwaysNotGrounded
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7332918590725698487, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
       propertyPath: forceGroundedAtStart

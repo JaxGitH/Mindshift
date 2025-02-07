@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3025268961710806997}
   - component: {fileID: 4864792168122251500}
   - component: {fileID: 5991759525832412542}
+  - component: {fileID: 5947454843675057045}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -108,3 +109,12 @@ MonoBehaviour:
   target: {fileID: 0}
   offset: {x: 0, y: 2, z: -5}
   smoothSpeed: 5
+--- !u!45 &5947454843675057045
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2207274367165118362}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 3083208eb0325384d97d0b01a905d152, type: 2}
