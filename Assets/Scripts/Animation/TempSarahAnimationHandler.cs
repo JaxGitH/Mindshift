@@ -22,8 +22,7 @@ public class TempSarahAnimationHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Actor V: " + characterActor.Velocity.magnitude);
-        Debug.Log("Animator V:" + animator.GetFloat("groundVelocity"));
         animator.SetFloat("groundVelocity", characterActor.Velocity.magnitude);
+        animator.SetBool("isGrounded", characterActor.IsGrounded);
     }
 }
