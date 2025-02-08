@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Experimental/GarryShowCase.unity
+    guid: 484899d562b31444fbd8ae04491577ac
   m_configObjects: {}
