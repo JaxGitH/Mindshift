@@ -7,6 +7,7 @@ public class TempSarahAnimationHandler : MonoBehaviour
 {
     Animator animator;
     [SerializeField] private CharacterActor characterActor;
+    bool isTestBool;
 
     private void Awake()
     {
@@ -17,6 +18,7 @@ public class TempSarahAnimationHandler : MonoBehaviour
         /*if (GetComponent<CharacterActor>() != null)
             characterActor = GetComponent<CharacterActor>();
         else Debug.LogError("CharacterActor Component could not be retrieved");*/
+        isTestBool = characterActor.isKinematic;
     }
 
     // Update is called once per frame
@@ -24,5 +26,6 @@ public class TempSarahAnimationHandler : MonoBehaviour
     {
         animator.SetFloat("groundVelocity", characterActor.Velocity.magnitude);
         animator.SetBool("isGrounded", characterActor.IsGrounded);
+        //characterActor.isKinematic
     }
 }
