@@ -1292,10 +1292,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7575966943831185459}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 83, y: 6}
-  m_SizeDelta: {x: 334.8669, y: 50}
+  m_AnchorMin: {x: 0.47700003, y: 0.5}
+  m_AnchorMax: {x: 0.47700003, y: 0.5}
+  m_AnchoredPosition: {x: -175, y: -1}
+  m_SizeDelta: {x: 282.7304, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8112602512720633867
 CanvasRenderer:
@@ -1325,9 +1325,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Lab 3
-
-'
+  m_text: Radioactive Quarantine Laboratory
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1354,10 +1352,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.7
+  m_fontSize: 37.15
   m_fontSizeBase: 54.7
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -1390,7 +1388,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -378.3238, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1766,8 +1764,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -306, y: 235.26794}
-  m_SizeDelta: {x: 369.6577, y: 83.3775}
+  m_AnchoredPosition: {x: -143.57477, y: 235.26794}
+  m_SizeDelta: {x: 694.5082, y: 83.3775}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2659294949797938494
 CanvasRenderer:
