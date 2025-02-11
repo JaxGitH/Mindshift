@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8946132331639467992}
   - component: {fileID: 7810897056337373402}
   - component: {fileID: 6926253659161601013}
+  - component: {fileID: 1870159651066870616}
   m_Layer: 6
   m_Name: Pf_Heavy_Cube
   m_TagString: Untagged
@@ -84,6 +85,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6, y: 1.6, z: 1.6}
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!114 &1870159651066870616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473701365400521696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e618385d73e5aa243b15e2e95934616f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isResettable: 1
+  isDragging: 0
 --- !u!1 &1805113581035740044
 GameObject:
   m_ObjectHideFlags: 0
