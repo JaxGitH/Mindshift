@@ -81,7 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   is2D: 0
   bodySize: {x: 0.8, y: 1.6}
-  mass: 50
+  mass: 3
 --- !u!114 &7332918590725698487
 MonoBehaviour:
   m_ObjectHideFlags: 0
