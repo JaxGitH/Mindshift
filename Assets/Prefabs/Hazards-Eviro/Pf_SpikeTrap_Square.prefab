@@ -13,9 +13,7 @@ GameObject:
   - component: {fileID: 5459108053759789235}
   - component: {fileID: 5647223612916438234}
   - component: {fileID: 8766117640331794459}
-  - component: {fileID: 7421654056024919031}
   - component: {fileID: 3821618290939440471}
-  - component: {fileID: 5928034110045103349}
   - component: {fileID: 3323128839100462645}
   m_Layer: 6
   m_Name: Pf_SpikeTrap_Square
@@ -335,33 +333,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515538331426904647}
   m_Mesh: {fileID: 0}
---- !u!54 &7421654056024919031
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 515538331426904647}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
 --- !u!65 &3821618290939440471
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -383,22 +354,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2, y: 0.3, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5928034110045103349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 515538331426904647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 095184ebbe8e14840aab0c75d31f7f69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canBeAttached: 1
-  weight: 2
-  liftOffset: 0.5
-  attachmentPoint: {fileID: 4058135722579078413}
 --- !u!114 &3323128839100462645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,3 +433,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOccupied: 0
+  attachedParent: {fileID: 0}

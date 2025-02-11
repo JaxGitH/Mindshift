@@ -50,7 +50,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 69ea1af866eebe24a8b184f5c8b04786, type: 3}
+        m_Texture: {fileID: 2800000, guid: 76d6f050b30526145a7d7606dea7fe0a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -131,7 +131,6 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tint: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &3476893666249429480
 MonoBehaviour:
   m_ObjectHideFlags: 11

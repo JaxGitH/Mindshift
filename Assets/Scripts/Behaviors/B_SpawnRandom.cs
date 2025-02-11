@@ -1,24 +1,28 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class B_SpawnRandom : MonoBehaviour
 {
     [Header("Spawn Settings")]
-    [SerializeField] private GameObject[] spawnPrefabs; // Array of prefabs to spawn
-    [SerializeField] private Transform spawnPoint; // Spawn location (defaults to spawner's position)
+    [SerializeField] private GameObject[] spawnPrefabs;
+    [SerializeField] private Transform spawnPoint;
+
+    private bool hasSpawned = false; // Prevents double spawning
 
     private void Start()
     {
         if (spawnPoint == null)
-            spawnPoint = transform; // Default to this GameObject's position
+            spawnPoint = transform;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // Ensure only the player triggers the spawn
+        if (hasSpawned) return; // Prevent multiple triggers
+
+        if (other.CompareTag("Player"))
         {
+            hasSpawned = true; // Mark as triggered
             SpawnRandomPrefab();
-            Destroy(gameObject); // Destroy the spawner after triggering
+            Destroy(gameObject);
         }
     }
 
