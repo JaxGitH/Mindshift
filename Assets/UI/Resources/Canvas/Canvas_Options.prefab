@@ -90,7 +90,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5895971321228448675}
+        m_TargetAssemblyTypeName: Options, Assembly-CSharp
+        m_MethodName: OnMusicVolumeChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &727766788340129772
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,7 +724,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6117990725367338018}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5895971321228448675}
+        m_TargetAssemblyTypeName: Options, Assembly-CSharp
+        m_MethodName: OnReturnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3740292859138686929
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,6 +958,7 @@ GameObject:
   - component: {fileID: 193884669590891147}
   - component: {fileID: 1406198589928378047}
   - component: {fileID: 5218086818063383140}
+  - component: {fileID: 5895971321228448675}
   m_Layer: 5
   m_Name: Canvas_Options
   m_TagString: Untagged
@@ -1024,6 +1049,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5895971321228448675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4518000385503535329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7b803ec9d8c26b438081e7e8cea9068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BGMSlider: {fileID: 4910442248346001291}
+  SFXSlider: {fileID: 6035002677266676847}
 --- !u!1 &5264125701035876587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,7 +1264,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5895971321228448675}
+        m_TargetAssemblyTypeName: Options, Assembly-CSharp
+        m_MethodName: OnEffectsVolumeChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5742451394788570827
 GameObject:
   m_ObjectHideFlags: 0

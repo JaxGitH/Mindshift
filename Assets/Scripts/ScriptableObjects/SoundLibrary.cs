@@ -1,9 +1,9 @@
 using UnityEngine;
-// /!\ DO NOT TOUCH THIS SCRIPT UNDER ANY CIRCUMSTANCES /!\
 // This script handles the Scriptable Object that will hold the sound effects and music to draw from.
-// Last updated: 2/6/25
-public enum eEffects { click, effect1, effect2, effect3, effect4, effect5, effect6 }
-public enum eSongs { song1, song2, song3, song4 }
+// To add new sound effects to the array, add the name to the appropiate enum list.
+// Last updated: 2/12/25
+public enum eEffects { click, confirm, back, pause, balloon, teleporter }
+public enum eSongs { mainmenu, options, level }
 
 [CreateAssetMenu(fileName = "New SoundLibrary", menuName = "Create SoundLibrary")]
 public class SoundLibrary : ScriptableObject

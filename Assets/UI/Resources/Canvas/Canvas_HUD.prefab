@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: II
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 469b0870fcf38604b9a108342fd910b4, type: 2}
+  m_sharedMaterial: {fileID: -3960931065410374785, guid: 469b0870fcf38604b9a108342fd910b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 4678416283915414053}
   - component: {fileID: 8076430664873208103}
   - component: {fileID: 577890586940618762}
+  - component: {fileID: 2204852807268621672}
   m_Layer: 5
   m_Name: Canvas_HUD
   m_TagString: Untagged
@@ -237,6 +238,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2204852807268621672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6574832781453480227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58dcf219af92ed42a8c9da486c9b837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9089732177205238591
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +370,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1858162252211558892}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6574832781453480227}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &7974677296191729890
 PrefabInstance:
   m_ObjectHideFlags: 0
