@@ -15,4 +15,16 @@ public class LoadScene : MonoBehaviour
             Debug.Log("Missing level to load.");
         }
     }
+
+    public void OnButtonPressed(string _levelName)
+    {
+        //Searches for the name of the scene/level in the editor, click the button and change the name in the Inspector.
+        //AudioManager.PlayEffect(eEffects.click);
+        Debug.Log(_levelName);
+        SceneManager.LoadScene(_levelName);
+        if (_levelName == null)
+        {
+            Debug.Log("Missing level to load.");
+        }
+    }
 }

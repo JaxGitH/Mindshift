@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FrontEnd/FrontEnd.unity
     guid: feec4037217f35c4eb77d3bacc633689
+  - enabled: 1
+    path: Assets/Scenes/Levels/Zone1_Level2(Challenge).unity
+    guid: 951f1d7797118094e978a009ee15b35b
   m_configObjects: {}

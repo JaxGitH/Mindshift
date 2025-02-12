@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2b13df7f0d90fa40b09922dced2535f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterActor: {fileID: 0}
+  characterActor: {fileID: 7332918590725698487}
   joystick: {fileID: 0}
   moveSpeed: 5
   jumpForce: 10
@@ -257,11 +257,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ba91331e134500445bf161d7d484f1a0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8
+      value: 0.93
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ba91331e134500445bf161d7d484f1a0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8
+      value: 0.93
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ba91331e134500445bf161d7d484f1a0, type: 3}
       propertyPath: m_LocalScale.z
