@@ -1,6 +1,6 @@
 using UnityEngine;
-//This script helps manage the canvas/widget screens that'll be instantiated throughout the course of the game.
-//Last update: 1/30/25
+// This script helps manage the canvas/widget screens that'll be instantiated throughout the course of the game.
+// Last update: 2/12/25
 public class CanvasManager : MonoBehaviour
 {
     public static CanvasManager Instance;
@@ -32,5 +32,25 @@ public class CanvasManager : MonoBehaviour
     {
         //Shows World 3's levels
         Instantiate(Resources.Load("Canvas/" + "CanvasHUD") as GameObject);
+    }
+    public void ShowHud()
+    {
+        //Shows the Hud, which holds the pause button and the joystick.
+        Instantiate(Resources.Load("Canvas/" + "Canvas_Hud") as GameObject);
+    }
+    public void ShowPause()
+    {
+        //Shows the pause menu
+        Instantiate(Resources.Load("Canvas/" + "Canvas_Pause") as GameObject);
+    }
+    public void ShowExitConfirm()
+    {
+        //Shows the confirm exit screen
+        Instantiate(Resources.Load("Widgets/" + "Widget_Exit") as GameObject);
+    }
+    public void ShowOptions()
+    {
+        //Shows the options menu
+        Instantiate(Resources.Load("Canvas/" + "Canvas_Options") as GameObject);
     }
 }
