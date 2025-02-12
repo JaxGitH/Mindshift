@@ -1,4 +1,4 @@
-using Lightbug.CharacterControllerPro.Core;
+using Mindshift.CharacterControllerPro.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem; // New Input System
-using Lightbug.CharacterControllerPro.Core;
+using Mindshift.CharacterControllerPro.Core;
 
 public class CharacterInputHandler : MonoBehaviour
 {

@@ -5,10 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Experimental/GarryShowCase.unity
-    guid: 484899d562b31444fbd8ae04491577ac
   - enabled: 1
     path: Assets/Scenes/FrontEnd/FrontEnd.unity
     guid: feec4037217f35c4eb77d3bacc633689
+  - enabled: 1
+    path: Assets/Scenes/Levels/zone1Level2.unity
+    guid: 951f1d7797118094e978a009ee15b35b
+  - enabled: 1
+    path: Assets/Scenes/Experimental/Gil ONLY - hands off.unity
+    guid: 01eeeaf649ba2b04183d0082b03138f7
   m_configObjects: {}
