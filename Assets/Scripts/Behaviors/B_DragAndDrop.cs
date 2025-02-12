@@ -59,7 +59,9 @@ namespace Mindshift
                 float maxDragDistance = 0.5f; // Maximum movement per frame
                 dragOffset = Vector3.ClampMagnitude(dragOffset, maxDragDistance);
 
-                transform.position += dragOffset;
+                Vector3 newPosition = transform.position + dragOffset;
+                newPosition.z = transform.position.z; // Lock the Z-axis
+                transform.position = newPosition;
 
                 if (dragHoldTime >= longPressThreshold)
                 {

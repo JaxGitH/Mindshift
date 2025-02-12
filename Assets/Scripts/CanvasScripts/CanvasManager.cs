@@ -28,10 +28,10 @@ public class CanvasManager : MonoBehaviour
         //Shows World 2's levels
         Instantiate(Resources.Load("Canvas/" + "Canvas_SelectLevel2") as GameObject);
     }
-    public void ShowSelectLevel3()
+    public void ShowCanvasHUD()
     {
         //Shows World 3's levels
-        Instantiate(Resources.Load("Canvas/" + "Canvas_SelectLevel3") as GameObject);
+        Instantiate(Resources.Load("Canvas/" + "CanvasHUD") as GameObject);
     }
     public void ShowHud()
     {

@@ -1,5 +1,5 @@
 using UnityEngine;
-using Lightbug.CharacterControllerPro.Core;
+using Mindshift.CharacterControllerPro.Core;
 
 public class B_Checkpoint : MonoBehaviour
 {

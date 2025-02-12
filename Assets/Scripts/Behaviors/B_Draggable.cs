@@ -58,6 +58,7 @@ public class B_Draggable : MonoBehaviour
     private void DragObject()
     {
         Vector3 newPosition = GetMouseWorldPosition() + offset;
+        newPosition.z = transform.position.z; // Lock the Z-axis
         transform.position = newPosition;
     }
 

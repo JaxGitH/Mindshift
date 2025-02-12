@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Lightbug.CharacterControllerPro.Core
+namespace Mindshift.CharacterControllerPro.Core
 {
     public class CharacterCamera : MonoBehaviour
     {

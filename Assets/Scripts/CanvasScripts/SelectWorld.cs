@@ -19,7 +19,7 @@ public class SelectWorld : MonoBehaviour
     {
         //Calls the method in CanvasManager to show the World 3 level select
         AudioManager.PlayEffect(eEffects.click);
-        CanvasManager.Instance.ShowSelectLevel3();
+//        CanvasManager.Instance.ShowSelectLevel3();
     }
     public void OnReturnPressed()
     {
