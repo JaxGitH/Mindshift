@@ -15,6 +15,6 @@ MonoBehaviour:
   effects:
   - {fileID: 8300000, guid: 5dcd8ccd209ca8845923941ce2b5af0f, type: 3}
   songs:
-  - {fileID: 8300000, guid: 6e2c67b1ccd06834f8bd62ed2a14b6d9, type: 3}
-  - {fileID: 8300000, guid: f21ed33351b78284eb942e12c9ebe58b, type: 3}
-  - {fileID: 8300000, guid: ad7f33a263d90544ab72506cf180524c, type: 3}
+  - {fileID: 8300000, guid: d434c58bbd762ee46a4126c969105acb, type: 3}
+  - {fileID: 8300000, guid: 1575ef5657faa4245976ade3a57c7c4c, type: 3}
+  - {fileID: 8300000, guid: 134bfc36229065f4c95b7847b2445d9b, type: 3}
