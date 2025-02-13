@@ -880,7 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d767e302335127439f73886d62ddc09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: Zone1_Level2(Challenge)
+  levelName: zone1Level2
 --- !u!1 &2103543206811607820
 GameObject:
   m_ObjectHideFlags: 0

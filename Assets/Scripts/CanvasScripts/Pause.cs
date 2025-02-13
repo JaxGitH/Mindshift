@@ -7,7 +7,7 @@ public class Pause : MonoBehaviour
     {
         AudioManager.PlayEffect(eEffects.click);
         AudioManager.ResumeSong();
-        Destroy(this);
+        Destroy(this.gameObject);
     }
     public void OnOptionsClicked()
     {

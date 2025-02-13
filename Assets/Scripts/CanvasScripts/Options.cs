@@ -27,7 +27,7 @@ public class Options : MonoBehaviour
     }
     public void OnReturnClicked()
     {
-        AudioManager.PlaySong(eSongs.mainmenu);
+        AudioManager.PauseSong();
         AudioManager.PlayEffect(eEffects.click);
         Destroy(this.gameObject);
     }
