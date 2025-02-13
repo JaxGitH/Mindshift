@@ -6,12 +6,13 @@ public enum eMixers { music, effects }
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
+    static float currentSongPosition;
 
     [NamedArray(typeof(eMixers))] public AudioMixerGroup[] mixers;
     [NamedArray(typeof(eMixers))] public float[] volume = { 1f, 1f };
     [NamedArray(typeof(eMixers))] private string[] strMixers = { "MusicVol", "EffectsVol" };
 
-    [SerializeField] private AudioSource BGM;
+    [SerializeField] public AudioSource BGM;
     [SerializeField] private AudioSource Effects;
 
     private void Awake()
@@ -45,12 +46,34 @@ public class AudioManager : MonoBehaviour
         Instance.BGM.clip = GameManager.Instance.soundLibrary.songs[(int)_song];
         Instance.BGM.Play();
     }
-    public static void PauseSong()
+    //This method exists to stop a current song playing.
+    public static void StopSong()
     {
+        Instance.BGM.Stop();
+    }
+    //"PauseLevelSong()" and "ResumeLevelSong()" are called when the Pause menu is pressed so it can resume the level song where it left off
+    public static void PauseLevelSong()
+    {
+        currentSongPosition = Instance.BGM.time;
         Instance.BGM.Pause();
     }
-    public static void ResumeSong()
+    public static void ResumeLevelSong()
     {
+        PlaySong(eSongs.level);
+        Instance.BGM.time = currentSongPosition;
         Instance.BGM.UnPause();
+    }
+    //This catches Pause menu x Options menu x Main menu music interactions
+    public static void ResumePrevious(string _sceneName)
+    {
+        if (_sceneName == "FrontEnd")
+        {
+            Instance.BGM.Stop();
+            PlaySong(eSongs.mainmenu);
+        }
+        else if (_sceneName == "zone1Level2")
+        {
+            Instance.BGM.Stop();
+        }
     }
 }

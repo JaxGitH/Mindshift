@@ -6,7 +6,7 @@ public class Hud : MonoBehaviour
     public void OnPausePressed()
     {
         AudioManager.PlayEffect(eEffects.click);
-        AudioManager.PauseSong();
+        AudioManager.PauseLevelSong();
         CanvasManager.Instance.ShowPause();
     }
 }

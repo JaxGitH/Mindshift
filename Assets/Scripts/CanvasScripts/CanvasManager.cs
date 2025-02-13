@@ -12,6 +12,7 @@ public class CanvasManager : MonoBehaviour
     {
         //Shows the "Front End" canvas.
         Instantiate(Resources.Load("Canvas/" + "Canvas_FE") as GameObject);
+        SceneMgr.sceneString = "FrontEnd";
     }
     public void ShowSelectWorld()
     {
@@ -38,6 +39,8 @@ public class CanvasManager : MonoBehaviour
     {
         //Shows the Hud, which holds the pause button and the joystick.
         Instantiate(Resources.Load("Canvas/" + "Canvas_Hud") as GameObject);
+        SceneMgr.sceneString = "zone1Level2";
+        Debug.Log(SceneMgr.sceneString);
     }
     public void ShowPause()
     {

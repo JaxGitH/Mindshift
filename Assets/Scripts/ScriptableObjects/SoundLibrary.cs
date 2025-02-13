@@ -3,7 +3,7 @@ using UnityEngine;
 // To add new sound effects to the array, add the name to the appropiate enum list.
 // Last updated: 2/12/25
 public enum eEffects { click, confirm, back, pause, balloon, teleporter }
-public enum eSongs { mainmenu, options, level }
+public enum eSongs { mainmenu, options, level, extras }
 
 [CreateAssetMenu(fileName = "New SoundLibrary", menuName = "Create SoundLibrary")]
 public class SoundLibrary : ScriptableObject

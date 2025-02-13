@@ -6,6 +6,7 @@ public enum eScene { frontEnd, zone1Level2 };
 
 public class SceneMgr : MonoBehaviour
 {
+    public static string sceneString;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -22,9 +23,11 @@ public class SceneMgr : MonoBehaviour
         {
             case eScene.frontEnd:
                 CanvasManager.Instance.ShowCanvasFE();
+                sceneString = "FrontEnd";
                 break;
             case eScene.zone1Level2:
                 CanvasManager.Instance.ShowCanvasHUD();
+                sceneString = "zone1Level2";
                 break;
             default:
                 break;

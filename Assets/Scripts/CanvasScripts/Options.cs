@@ -16,6 +16,7 @@ public class Options : MonoBehaviour
     {
         BGMSlider.value = AudioManager.Instance.volume[(int)eMixers.music];
         SFXSlider.value = AudioManager.Instance.volume[(int)eMixers.effects];
+
     }
     public void OnMusicVolumeChanged(float _value)
     {
@@ -27,7 +28,7 @@ public class Options : MonoBehaviour
     }
     public void OnReturnClicked()
     {
-        AudioManager.PauseSong();
+        AudioManager.ResumePrevious(SceneMgr.sceneString);
         AudioManager.PlayEffect(eEffects.click);
         Destroy(this.gameObject);
     }
