@@ -7,6 +7,7 @@ public class B_Draggable : MonoBehaviour
     private Rigidbody rb;
     public bool isDragging = false;
     private Vector3 offset;
+    private bool isPlayerContact = false; // New flag to track player contact
 
     private void Start()
     {
@@ -28,7 +29,10 @@ public class B_Draggable : MonoBehaviour
 
     private void OnMouseDown()
     {
-        StartDragging();
+        if (!isPlayerContact) // Prevent dragging if player is in contact
+        {
+            StartDragging();
+        }
     }
 
     private void OnMouseUp()
@@ -67,5 +71,21 @@ public class B_Draggable : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = Camera.main.WorldToScreenPoint(transform.position).z;
         return Camera.main.ScreenToWorldPoint(mousePosition);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerContact = true; // Disable dragging
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerContact = false; // Re-enable dragging
+        }
     }
 }

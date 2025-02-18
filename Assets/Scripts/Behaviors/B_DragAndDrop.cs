@@ -9,6 +9,7 @@ namespace Mindshift
         protected bool isBeingDragged = false;
         private Vector3 initialPosition;
         private Vector3 offset;
+        private bool isPlayerContact = false; // Flag to track player contact
 
         [Header("Dragging Settings")]
         [SerializeField] protected float dragHoldTime = 0f;
@@ -32,7 +33,7 @@ namespace Mindshift
 
         protected virtual void HandleMouseInput()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !isPlayerContact) // Prevent dragging if player is in contact
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit) && hit.transform == transform)
@@ -51,11 +52,9 @@ namespace Mindshift
                 mousePosition.z = Camera.main.WorldToScreenPoint(transform.position).z;
                 Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-                // Calculate drag offset with resistance
                 float resistanceFactor = Mathf.Log10(dragWeight + 1f);
                 Vector3 dragOffset = (worldPosition - transform.position) / resistanceFactor;
 
-                // Clamp drag offset to prevent excessive movement
                 float maxDragDistance = 0.5f; // Maximum movement per frame
                 dragOffset = Vector3.ClampMagnitude(dragOffset, maxDragDistance);
 
@@ -67,8 +66,6 @@ namespace Mindshift
                 {
                     OnLongPress();
                 }
-
-                Debug.Log($"Dragging {gameObject.name} with weight {dragWeight}: resistance factor {resistanceFactor}, offset {dragOffset}");
             }
 
             if (Input.GetMouseButtonUp(0) && isBeingDragged)
@@ -78,9 +75,25 @@ namespace Mindshift
             }
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                isPlayerContact = true; // Disable dragging
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                isPlayerContact = false; // Re-enable dragging
+            }
+        }
+
         protected virtual void HandleTouchInput()
         {
-            if (Input.touchCount > 0)
+            if (Input.touchCount > 0 && !isPlayerContact)
             {
                 Touch touch = Input.GetTouch(0);
                 Ray ray = mainCamera.ScreenPointToRay(touch.position);
