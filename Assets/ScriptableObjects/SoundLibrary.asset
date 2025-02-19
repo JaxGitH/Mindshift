@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SoundLibrary
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 8300000, guid: df4326580b900e544ab38a1f3f31d9d7, type: 3}
+  - {fileID: 8300000, guid: d3f4669b32b12674995e7e75dda01b7c, type: 3}
   songs:
   - {fileID: 8300000, guid: d434c58bbd762ee46a4126c969105acb, type: 3}
-  - {fileID: 8300000, guid: 4876cba8d81dd5341a17ef270dede1df, type: 3}
+  - {fileID: 8300000, guid: ffa13840d7472e7468c98c6df5a29c03, type: 3}
   - {fileID: 8300000, guid: 134bfc36229065f4c95b7847b2445d9b, type: 3}
