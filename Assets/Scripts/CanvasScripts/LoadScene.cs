@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 //This script lets you put a scene/level's name on the button this script is assigned to, so the button can load the scene.
-//Last update: 2/12/25
+//Last update: 2/19/25
 public class LoadScene : MonoBehaviour
 {
     public string levelName;
@@ -9,7 +9,7 @@ public class LoadScene : MonoBehaviour
     {
         //Searches for the name of the scene/level in the editor, click the button and change the name in the Inspector.
         AudioManager.PlayEffect(eEffects.click);
-        AudioManager.PlaySong(eSongs.level);
+        AudioManager.PlaySong(eSongs.sterileMusic);
         SceneManager.LoadScene(levelName);
         if (levelName == null)
         {

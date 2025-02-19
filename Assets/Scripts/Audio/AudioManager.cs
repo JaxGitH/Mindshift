@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 // This script handles the AudioManager, volume sliders and the "play sound effect" method.
-// Last updated: 2/12/25
+// Last updated: 2/19/25
 public enum eMixers { music, effects }
 public class AudioManager : MonoBehaviour
 {
@@ -59,7 +59,7 @@ public class AudioManager : MonoBehaviour
     }
     public static void ResumeLevelSong()
     {
-        PlaySong(eSongs.level);
+        PlaySong(eSongs.sterileMusic);
         Instance.BGM.time = currentSongPosition;
         Instance.BGM.UnPause();
     }
