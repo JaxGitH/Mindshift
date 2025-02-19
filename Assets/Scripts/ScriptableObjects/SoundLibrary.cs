@@ -57,7 +57,7 @@ public enum eEffects {
 }
 public enum eSongs { 
     //Front End
-    mainmenu, options, 
+    mainMenu, options, 
     //Levels
     sterileMusic, cryoMusic, radioactiveMusic,
     //Misc.
