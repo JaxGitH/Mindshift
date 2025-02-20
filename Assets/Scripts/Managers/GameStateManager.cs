@@ -1,96 +1,115 @@
-﻿using UnityEngine;
+﻿using Mindshift;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class GameStateManager : MonoBehaviour
+namespace Mindshift
 {
-    public static GameStateManager Instance { get; private set; }
-
-    public enum InputPriority
+    public class GameStateManager : MonoBehaviour
     {
-        KeyboardJoystick,
-        MouseTouch
-    }
+        public bool IsUsingMouseTouch => isUsingMouseTouch;
+        public bool IsUsingKeyboardJoystick => isUsingKeyboardJoystick;
 
-    [Header("Input Settings")]
-    public InputPriority inputPriority = InputPriority.KeyboardJoystick;
+        private PlayerInputActions inputActions;
+        public static GameStateManager Instance;
 
-    private bool isUsingKeyboardJoystick = false;
-    private bool isUsingMouseTouch = false;
-
-    public bool IsDraggingObject { get; private set; }
-    public bool cannotAcceptInput;
-
-    private void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-    }
-
-    private void Update()
-    {
-        if (!IsDraggingObject || !cannotAcceptInput)  // Allow input switching only when not dragging
+        public enum InputPriority
         {
-            DetectInput();
+            KeyboardJoystick,
+            MouseTouch
         }
 
-    }
+        [Header("Input Settings")]
+        public InputPriority inputPriority = InputPriority.KeyboardJoystick;
 
-    private void DetectInput()
-    {
-        bool keyboardInput = Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 ||
-                             Input.GetButton("Jump") || Input.GetButton("Fire1");
+        private bool isUsingKeyboardJoystick = false;
+        private bool isUsingMouseTouch = false;
 
-        bool mouseInput = Input.GetMouseButton(0) || Input.touchCount > 0;
+        public bool IsDraggingObject { get; private set; }
+        public bool cannotAcceptInput;
 
-        if (keyboardInput && inputPriority == InputPriority.KeyboardJoystick)
+        // ✅ New: Track if keyboard input is active globally
+        public bool IsKeyboardInputActive;
+
+        private void Awake()
         {
-            RegisterKeyboardJoystickInput();
+            if (Instance == null)
+                Instance = this;
+            else
+                Destroy(gameObject);
+
+            inputActions = new PlayerInputActions();
+            inputActions.Enable();
         }
-        else if (mouseInput && inputPriority == InputPriority.MouseTouch)
+
+        private void Update()
         {
-            RegisterMouseTouchInput();
+            if (!IsDraggingObject || !cannotAcceptInput)
+            {
+                DetectInput();
+            }
         }
-        else if (keyboardInput && !isUsingMouseTouch)
+
+        public bool IsAnyInputActive()
         {
-            RegisterKeyboardJoystickInput();
+            return isUsingKeyboardJoystick || isUsingMouseTouch;
         }
-        else if (mouseInput && !isUsingKeyboardJoystick)
+
+        public bool IsMovementInputActive()
         {
-            RegisterMouseTouchInput();
+            return CharacterInputHandler.Instance != null && CharacterInputHandler.Instance.IsMovementInputActive();
         }
-    }
 
-    public void RegisterKeyboardJoystickInput()
-    {
-        isUsingKeyboardJoystick = true;
-        isUsingMouseTouch = false;
-    }
+        private void DetectInput()
+        {
+            bool keyboardInput = inputActions.GamePlay.Move.ReadValue<Vector2>().magnitude > 0.1f;
 
-    public void RegisterMouseTouchInput()
-    {
-        isUsingMouseTouch = true;
-        isUsingKeyboardJoystick = false;
-    }
+            // ✅ Track keyboard input globally
+            IsKeyboardInputActive = keyboardInput;
+        }
 
-    public bool CanUseKeyboardJoystick()
-    {
-        return !isUsingMouseTouch && (inputPriority == InputPriority.KeyboardJoystick || !isUsingMouseTouch);
-    }
+        public void RegisterKeyboardJoystickInput()
+        {
+            isUsingKeyboardJoystick = true;
+            isUsingMouseTouch = false;
 
-    public bool CanUseMouseTouch()
-    {
-        return !isUsingKeyboardJoystick && (inputPriority == InputPriority.MouseTouch || !isUsingKeyboardJoystick);
-    }
+            if (CharacterInputHandler.Instance != null)
+            {
+                CharacterInputHandler.Instance.ResetMovement();
+            }
+        }
 
-    public void SetDraggingState(bool isDragging)
-    {
-        IsDraggingObject = isDragging;
-    }
+        public void RegisterMouseTouchInput()
+        {
+            isUsingMouseTouch = true;
+            isUsingKeyboardJoystick = false;
 
-    public void ResetInput() // Useful if needed to manually reset inputs
-    {
-        isUsingKeyboardJoystick = false;
-        isUsingMouseTouch = false;
+            if (CharacterInputHandler.Instance != null)
+            {
+                CharacterInputHandler.Instance.ResetMovement();
+            }
+        }
+
+        public bool CanUseKeyboardJoystick()
+        {
+            return !isUsingMouseTouch && !isUsingMouseTouch;
+        }
+
+        // ✅ Mouse input is disabled if keyboard input is active
+        public bool CanUseMouseInput()
+        {
+            return !IsKeyboardInputActive && !isUsingKeyboardJoystick;
+        }
+
+        public void SetDraggingState(bool isDragging)
+        {
+            IsDraggingObject = isDragging;
+        }
+
+        public void ResetInput()
+        {
+            isUsingKeyboardJoystick = false;
+            isUsingMouseTouch = false;
+            IsKeyboardInputActive = false;
+        }
     }
 }

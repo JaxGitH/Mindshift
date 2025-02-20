@@ -7,14 +7,12 @@ namespace Mindshift
         protected Rigidbody objectRb;
         protected Camera mainCamera;
         protected bool isBeingDragged = false;
-//        private Vector3 initialPosition;
-//        private Vector3 offset;
-        public bool isPlayerContact = false; // Flag to track player contact
+        public bool isPlayerContact = false;
 
         [Header("Dragging Settings")]
         [SerializeField] protected float dragHoldTime = 0f;
         [SerializeField] protected float longPressThreshold = 1.0f;
-        [SerializeField] protected float dragWeight = 1.0f; // Weight affecting drag resistance
+        [SerializeField] protected float dragWeight = 1.0f;
 
         protected virtual void Start()
         {
@@ -33,7 +31,8 @@ namespace Mindshift
 
         protected virtual void HandleMouseInput()
         {
-            if (!GameStateManager.Instance.CanUseMouseTouch() || GameStateManager.Instance.cannotAcceptInput) return; // Block mouse input
+            // ✅ Mouse input is disabled if CharacterInputHandler blocks it
+            if (!CharacterInputHandler.Instance.CanUseMouseInput()) return;
 
             if (Input.GetMouseButtonDown(0) && !isPlayerContact)
             {
@@ -62,11 +61,12 @@ namespace Mindshift
                 objectRb.isKinematic = false;
             }
         }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                isPlayerContact = true; // Disable dragging
+                isPlayerContact = true;
             }
         }
 
@@ -74,58 +74,8 @@ namespace Mindshift
         {
             if (other.CompareTag("Player"))
             {
-                isPlayerContact = false; // Re-enable dragging
+                isPlayerContact = false;
             }
-        }
-
-        protected virtual void HandleTouchInput()
-        {
-            if (Input.touchCount > 0 && !isPlayerContact)
-            {
-                Touch touch = Input.GetTouch(0);
-                Ray ray = mainCamera.ScreenPointToRay(touch.position);
-
-                switch (touch.phase)
-                {
-                    case TouchPhase.Began:
-                        if (Physics.Raycast(ray, out RaycastHit hit) && hit.transform == transform)
-                        {
-                            isBeingDragged = true;
-                            objectRb.isKinematic = true;
-                            dragHoldTime = 0f;
-                        }
-                        break;
-
-                    case TouchPhase.Moved:
-                        if (isBeingDragged)
-                        {
-                            dragHoldTime += Time.deltaTime;
-
-                            Vector3 touchPosition = touch.position;
-                            touchPosition.z = mainCamera.WorldToScreenPoint(transform.position).z;
-                            Vector3 worldPosition = mainCamera.ScreenToWorldPoint(touchPosition);
-                            transform.position = new Vector3(worldPosition.x, worldPosition.y, transform.position.z);
-
-                            if (dragHoldTime >= longPressThreshold)
-                            {
-                                OnLongPress();
-                            }
-                        }
-                        break;
-
-                    case TouchPhase.Ended:
-                        if (isBeingDragged)
-                        {
-                            isBeingDragged = false;
-                            objectRb.isKinematic = false;
-                        }
-                        break;
-                }
-            }
-        }
-
-        protected virtual void OnLongPress()
-        {
         }
     }
 }

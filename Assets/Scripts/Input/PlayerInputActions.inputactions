@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "LeftClickAction",
+                    "name": "Click",
                     "type": "PassThrough",
                     "id": "d12e2586-e18d-4603-9250-8e15b968fb01",
                     "expectedControlType": "Button",
@@ -129,7 +129,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftClickAction",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -140,7 +140,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftClickAction",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

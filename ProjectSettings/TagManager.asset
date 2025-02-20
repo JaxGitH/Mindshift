@@ -7,6 +7,8 @@ TagManager:
   - Balloon
   - AttachmentPoint
   - Mantleable
+  - Magnet
+  - Draggable
   layers:
   - Default
   - TransparentFX
