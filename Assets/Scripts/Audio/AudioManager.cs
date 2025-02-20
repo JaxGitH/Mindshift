@@ -69,7 +69,7 @@ public class AudioManager : MonoBehaviour
         if (_sceneName == "FrontEnd")
         {
             Instance.BGM.Stop();
-            PlaySong(eSongs.mainmenu);
+            PlaySong(eSongs.mainMenu);
         }
         else if (_sceneName == "zone1Level2")
         {

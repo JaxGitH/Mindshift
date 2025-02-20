@@ -6,7 +6,7 @@ public class FrontEnd : MonoBehaviour
     private void Awake()
     {
         //Plays the main menu song the moment the Front End is loaded, and it stops whatever music track was playing.
-        AudioManager.PlaySong(eSongs.mainmenu);
+        AudioManager.PlaySong(eSongs.mainMenu);
     }
     public void OnPlayPressed()
     {
