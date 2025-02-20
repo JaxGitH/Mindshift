@@ -59,7 +59,7 @@ public enum eSongs {
     //Front End
     mainMenu, options, 
     //Levels
-    sterileMusic, cryoMusic, radioactiveMusic,
+    tutorial, sterileMusic, cryoMusic, radioactiveMusic,
     //Misc.
     extras, credits,
     }
