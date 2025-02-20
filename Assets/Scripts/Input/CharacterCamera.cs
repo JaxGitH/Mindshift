@@ -1,6 +1,7 @@
+using Mindshift;
 using UnityEngine;
 
-namespace Mindshift.CharacterControllerPro.Core
+namespace Mindshift
 {
     public class CharacterCamera : MonoBehaviour
     {

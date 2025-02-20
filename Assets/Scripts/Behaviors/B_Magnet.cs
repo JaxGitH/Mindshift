@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Mindshift
@@ -49,17 +48,17 @@ namespace Mindshift
 
         private Transform FindAttachPoint(Transform target)
         {
-            // Search all child objects for "AttachPoint"
+            // Search all child objects for "MagnetPoint"
             foreach (Transform child in target.GetComponentsInChildren<Transform>(true))
             {
                 if (child.name == "MagnetPoint")
                 {
-                    Debug.Log($"Found AttachPoint on {target.name} at {child.position}");
+                    Debug.Log($"Found MagnetPoint on {target.name} at {child.position}");
                     return child;
                 }
             }
 
-            Debug.LogWarning($"No AttachPoint found on {target.name}");
+            Debug.LogWarning($"No MagnetPoint found on {target.name}");
             return null;
         }
 

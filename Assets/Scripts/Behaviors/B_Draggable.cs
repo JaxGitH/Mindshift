@@ -1,17 +1,20 @@
+﻿using Mindshift;
 using UnityEngine;
 
-public class B_Draggable : MonoBehaviour
+public class B_Draggable : B_DragAndDrop
 {
     [Header("Draggable Settings")]
     [SerializeField] private bool isResettable = true;
     private Rigidbody rb;
     public bool isDragging = false;
     private Vector3 offset;
-    private bool isPlayerContact = false; // New flag to track player contact
+    private Collider draggableCollider;
 
-    private void Start()
+    protected override void Start()
     {
         rb = GetComponent<Rigidbody>();
+        draggableCollider = GetComponent<Collider>();
+
         if (rb == null)
         {
             Debug.LogError($"B_Draggable: No Rigidbody found on {gameObject.name}");
@@ -19,7 +22,7 @@ public class B_Draggable : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected override void Update()
     {
         if (isDragging)
         {
@@ -29,7 +32,7 @@ public class B_Draggable : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!isPlayerContact) // Prevent dragging if player is in contact
+        if (!isPlayerContact)
         {
             StartDragging();
         }
@@ -45,7 +48,14 @@ public class B_Draggable : MonoBehaviour
         if (rb != null)
         {
             isDragging = true;
-            rb.isKinematic = true; // Temporarily disable physics for smooth dragging
+            GameStateManager.Instance.SetDraggingState(true); // ✅ Notify GameStateManager
+            rb.isKinematic = true;
+
+            if (draggableCollider != null)
+            {
+                draggableCollider.enabled = false; // Disable collider while dragging
+            }
+
             offset = transform.position - GetMouseWorldPosition();
         }
     }
@@ -55,7 +65,13 @@ public class B_Draggable : MonoBehaviour
         if (rb != null)
         {
             isDragging = false;
-            rb.isKinematic = false; // Re-enable physics when dropped
+            GameStateManager.Instance.SetDraggingState(false); // ✅ Notify GameStateManager
+            rb.isKinematic = false;
+
+            if (draggableCollider != null)
+            {
+                draggableCollider.enabled = true; // Re-enable collider after dropping
+            }
         }
     }
 
@@ -77,7 +93,7 @@ public class B_Draggable : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerContact = true; // Disable dragging
+            isPlayerContact = true;
         }
     }
 
@@ -85,7 +101,7 @@ public class B_Draggable : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerContact = false; // Re-enable dragging
+            isPlayerContact = false;
         }
     }
 }

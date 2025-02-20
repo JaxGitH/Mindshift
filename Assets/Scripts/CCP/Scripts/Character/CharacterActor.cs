@@ -17,7 +17,7 @@ namespace Mindshift.CharacterControllerPro.Core
     [DefaultExecutionOrder(ExecutionOrder.CharacterActorOrder)]
     public class CharacterActor : PhysicsActor
     {
-        [Header("One way platforms")]        
+        [Header("One way platforms")]
 
         [Tooltip("One way platforms are objects that can be contacted by the character feet (bottom sphere) while descending.")]
         public LayerMask oneWayPlatformsLayerMask = 0;
@@ -29,7 +29,7 @@ namespace Mindshift.CharacterControllerPro.Core
         [Range(0f, 179f)]
         public float oneWayPlatformsValidArc = 175f;
 
-                
+
 
         [Header("Stability")]
 
@@ -238,6 +238,32 @@ namespace Mindshift.CharacterControllerPro.Core
             CustomUtilities.SetPositive(ref inheritedGroundVerticalVelocityMultiplier);
 
         }
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (GameStateManager.Instance.IsDraggingObject && collision.gameObject.CompareTag("Draggable"))
+            {
+                Physics.IgnoreCollision(GetComponent<Collider>(), collision.collider, true);
+            }
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Draggable"))
+            {
+                Physics.IgnoreCollision(GetComponent<Collider>(), collision.collider, false);
+            }
+        }
+        private void Update()
+        {
+            if (!GameStateManager.Instance.CanUseKeyboardJoystick()) return; // Block keyboard input
+
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
+                GameStateManager.Instance.RegisterKeyboardJoystickInput();
+            }
+
+            // Movement logic here...
+        }
 
         /// <summary>
         /// Sets up root motion for this actor.
@@ -322,7 +348,7 @@ namespace Mindshift.CharacterControllerPro.Core
 
         #region Collision Properties
 
-        public LayerMask ObstaclesLayerMask => PhysicsComponent.CollisionLayerMask | oneWayPlatformsLayerMask; 
+        public LayerMask ObstaclesLayerMask => PhysicsComponent.CollisionLayerMask | oneWayPlatformsLayerMask;
         public LayerMask ObstaclesWithoutOWPLayerMask => PhysicsComponent.CollisionLayerMask & ~(oneWayPlatformsLayerMask);
 
 
@@ -433,7 +459,7 @@ namespace Mindshift.CharacterControllerPro.Core
         /// <summary>
         /// Gets the current stability state of the character. Stability is equal to "grounded + slope angle <= slope limit".
         /// </summary>
-        public bool IsStable { get; private set; }        
+        public bool IsStable { get; private set; }
 
         /// <summary>
         /// Returns true if the character is grounded onto an unstable ground, false otherwise.
@@ -827,7 +853,7 @@ namespace Mindshift.CharacterControllerPro.Core
             base.Start();
 
             // Initial OWP check
-            var filter = new HitInfoFilter(ObstaclesLayerMask, false, true, oneWayPlatformsLayerMask);            
+            var filter = new HitInfoFilter(ObstaclesLayerMask, false, true, oneWayPlatformsLayerMask);
             CharacterCollisions.CheckOverlap(
                 Position,
                 0f,
