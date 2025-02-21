@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Mindshift
 {
@@ -7,13 +7,12 @@ namespace Mindshift
         protected Rigidbody objectRb;
         protected Camera mainCamera;
         protected bool isBeingDragged = false;
-        private Vector3 initialPosition;
-        private Vector3 offset;
+        public bool isPlayerContact = false;
 
         [Header("Dragging Settings")]
         [SerializeField] protected float dragHoldTime = 0f;
         [SerializeField] protected float longPressThreshold = 1.0f;
-        [SerializeField] protected float dragWeight = 1.0f; // Weight affecting drag resistance
+        [SerializeField] protected float dragWeight = 1.0f;
 
         protected virtual void Start()
         {
@@ -32,98 +31,51 @@ namespace Mindshift
 
         protected virtual void HandleMouseInput()
         {
-            if (Input.GetMouseButtonDown(0))
+            // ✅ Mouse input is disabled if CharacterInputHandler blocks it
+            if (!CharacterInputHandler.Instance.CanUseMouseInput()) return;
+
+            if (Input.GetMouseButtonDown(0) && !isPlayerContact)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit) && hit.transform == transform)
                 {
                     isBeingDragged = true;
-                    objectRb.isKinematic = true; // Disable physics while dragging
+                    objectRb.isKinematic = true;
                     dragHoldTime = 0f;
+                    GameStateManager.Instance.RegisterMouseTouchInput();
                 }
             }
 
             if (Input.GetMouseButton(0) && isBeingDragged)
             {
                 dragHoldTime += Time.deltaTime;
-
                 Vector3 mousePosition = Input.mousePosition;
                 mousePosition.z = Camera.main.WorldToScreenPoint(transform.position).z;
                 Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-                // Calculate drag offset with resistance
-                float resistanceFactor = Mathf.Log10(dragWeight + 1f);
-                Vector3 dragOffset = (worldPosition - transform.position) / resistanceFactor;
-
-                // Clamp drag offset to prevent excessive movement
-                float maxDragDistance = 0.5f; // Maximum movement per frame
-                dragOffset = Vector3.ClampMagnitude(dragOffset, maxDragDistance);
-
-                transform.position += dragOffset;
-
-                if (dragHoldTime >= longPressThreshold)
-                {
-                    OnLongPress();
-                }
-
-                Debug.Log($"Dragging {gameObject.name} with weight {dragWeight}: resistance factor {resistanceFactor}, offset {dragOffset}");
+                transform.position = new Vector3(worldPosition.x, worldPosition.y, transform.position.z);
             }
 
             if (Input.GetMouseButtonUp(0) && isBeingDragged)
             {
                 isBeingDragged = false;
-                objectRb.isKinematic = false; // Re-enable physics after dragging
+                objectRb.isKinematic = false;
             }
         }
 
-        protected virtual void HandleTouchInput()
+        private void OnTriggerEnter(Collider other)
         {
-            if (Input.touchCount > 0)
+            if (other.CompareTag("Player"))
             {
-                Touch touch = Input.GetTouch(0);
-                Ray ray = mainCamera.ScreenPointToRay(touch.position);
-
-                switch (touch.phase)
-                {
-                    case TouchPhase.Began:
-                        if (Physics.Raycast(ray, out RaycastHit hit) && hit.transform == transform)
-                        {
-                            isBeingDragged = true;
-                            objectRb.isKinematic = true;
-                            dragHoldTime = 0f;
-                        }
-                        break;
-
-                    case TouchPhase.Moved:
-                        if (isBeingDragged)
-                        {
-                            dragHoldTime += Time.deltaTime;
-
-                            Vector3 touchPosition = touch.position;
-                            touchPosition.z = mainCamera.WorldToScreenPoint(transform.position).z;
-                            Vector3 worldPosition = mainCamera.ScreenToWorldPoint(touchPosition);
-                            transform.position = new Vector3(worldPosition.x, worldPosition.y, transform.position.z);
-
-                            if (dragHoldTime >= longPressThreshold)
-                            {
-                                OnLongPress();
-                            }
-                        }
-                        break;
-
-                    case TouchPhase.Ended:
-                        if (isBeingDragged)
-                        {
-                            isBeingDragged = false;
-                            objectRb.isKinematic = false;
-                        }
-                        break;
-                }
+                isPlayerContact = true;
             }
         }
 
-        protected virtual void OnLongPress()
+        private void OnTriggerExit(Collider other)
         {
+            if (other.CompareTag("Player"))
+            {
+                isPlayerContact = false;
+            }
         }
     }
 }
