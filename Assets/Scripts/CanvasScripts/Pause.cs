@@ -1,12 +1,13 @@
 using UnityEngine;
 // This is the script attached to the pause menu
-// Last update: 2/12/25
+// Last update: 2/20/25
 public class Pause : MonoBehaviour
 {
     public void OnReturnClicked()
     {
         AudioManager.PlayEffect(eEffects.click);
         AudioManager.ResumeLevelSong();
+        Time.timeScale = 1;
         Destroy(this.gameObject);
     }
     public void OnOptionsClicked()
