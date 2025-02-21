@@ -1,70 +1,95 @@
+﻿using Mindshift;
 using UnityEngine;
 
-public class B_Draggable : MonoBehaviour
+namespace Mindshift
 {
-    [Header("Draggable Settings")]
-    [SerializeField] private bool isResettable = true;
-    private Rigidbody rb;
-    public bool isDragging = false;
-    private Vector3 offset;
-
-    private void Start()
+    public class B_Draggable : B_DragAndDrop
     {
-        rb = GetComponent<Rigidbody>();
-        if (rb == null)
+        [Header("Draggable Settings")]
+        [SerializeField] private bool isResettable = true;
+        private Rigidbody rb;
+        public bool isDragging = false;
+        private Vector3 offset;
+        private Collider draggableCollider;
+
+        protected override void Start()
         {
-            Debug.LogError($"B_Draggable: No Rigidbody found on {gameObject.name}");
-            enabled = false;
-        }
-    }
+            rb = GetComponent<Rigidbody>();
+            draggableCollider = GetComponent<Collider>();
 
-    private void Update()
-    {
-        if (isDragging)
+            if (rb == null)
+            {
+                Debug.LogError($"B_Draggable: No Rigidbody found on {gameObject.name}");
+                enabled = false;
+            }
+        }
+
+        protected override void Update()
         {
-            DragObject();
+            if (isDragging)
+            {
+                DragObject();
+            }
         }
-    }
 
-    private void OnMouseDown()
-    {
-        StartDragging();
-    }
-
-    private void OnMouseUp()
-    {
-        StopDragging();
-    }
-
-    private void StartDragging()
-    {
-        if (rb != null)
+        private void OnMouseDown()
         {
-            isDragging = true;
-            rb.isKinematic = true; // Temporarily disable physics for smooth dragging
-            offset = transform.position - GetMouseWorldPosition();
+            if (!isPlayerContact)
+            {
+                StartDragging();
+            }
         }
-    }
 
-    private void StopDragging()
-    {
-        if (rb != null)
+        private void OnMouseUp()
         {
-            isDragging = false;
-            rb.isKinematic = false; // Re-enable physics when dropped
+            StopDragging();
         }
-    }
 
-    private void DragObject()
-    {
-        Vector3 newPosition = GetMouseWorldPosition() + offset;
-        transform.position = newPosition;
-    }
+        private void StartDragging()
+        {
+            if (GameStateManager.Instance.IsMovementInputActive()) return;
 
-    private Vector3 GetMouseWorldPosition()
-    {
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = Camera.main.WorldToScreenPoint(transform.position).z;
-        return Camera.main.ScreenToWorldPoint(mousePosition);
+            if (rb != null)
+            {
+                isDragging = true;
+                GameStateManager.Instance.SetDraggingState(true);
+                rb.isKinematic = true;
+
+                if (draggableCollider != null)
+                {
+                    draggableCollider.enabled = false;
+                }
+
+                offset = transform.position - GetMouseWorldPosition();
+            }
+        }
+
+        private void StopDragging()
+        {
+            if (rb != null)
+            {
+                isDragging = false;
+                GameStateManager.Instance.SetDraggingState(false);
+                rb.isKinematic = false;
+
+                if (draggableCollider != null)
+                {
+                    draggableCollider.enabled = true;
+                }
+            }
+        }
+
+        private void DragObject()
+        {
+            Vector3 newPosition = GetMouseWorldPosition() + offset;
+            newPosition.z = transform.position.z;
+            transform.position = newPosition;
+        }
+        private Vector3 GetMouseWorldPosition()
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition.z = Camera.main.WorldToScreenPoint(transform.position).z;
+            return Camera.main.ScreenToWorldPoint(mousePosition);
+        }
     }
 }

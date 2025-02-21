@@ -1,5 +1,5 @@
 using UnityEngine;
-using Lightbug.CharacterControllerPro.Core;
+using Mindshift.CharacterControllerPro.Core;
 
 public class B_Bouncer : MonoBehaviour
 {
@@ -10,14 +10,6 @@ public class B_Bouncer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the object has B_Link and is attached
-        B_Link linkScript = other.GetComponentInParent<B_Link>();
-        if (linkScript != null && linkScript.isAttached)
-        {
-            Debug.Log($"Bouncer disabled because {other.gameObject.name} is linked.");
-            return;
-        }
-
         // Check if the collided object is in the specified Player Layer
         if (((1 << other.gameObject.layer) & playerLayer) != 0)
         {

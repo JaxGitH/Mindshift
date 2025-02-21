@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5627561189306019772}
   - component: {fileID: 2876782303062421349}
   - component: {fileID: 4673930472428258664}
-  - component: {fileID: 959064887635173348}
   - component: {fileID: 3560019391475021575}
   - component: {fileID: 2388528016164867628}
   - component: {fileID: 8047502703697939759}
@@ -1529,20 +1528,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &959064887635173348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221365341284397537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 075ccbe9837b0744985e09ba3f015b9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 4673930472428258664}
-  MoveWithPhysics: 1
 --- !u!33 &3560019391475021575
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1563,11 +1548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e618385d73e5aa243b15e2e95934616f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dragHoldTime: 0
-  longPressThreshold: 1
-  dragWeight: 1
   isResettable: 1
-  physicMaterial: {fileID: 13400000, guid: e1cc1249168f98c4b8e505e0175388a3, type: 2}
+  isDragging: 0
 --- !u!114 &8047502703697939759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1596,8 +1578,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9d68233c21c3646b1fe4f252d75092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 30
-  bounceCooldown: 0.2
+  bouncePower: 15
+  fallMultiplier: 1.5
   playerLayer:
     serializedVersion: 2
     m_Bits: 8

@@ -1,12 +1,12 @@
 using UnityEngine;
-//This script is for the FrontEnd scene.
-//Last update: 2/6/25
+// This script is for the FrontEnd scene.
+// Last update: 2/20/25
 public class FrontEnd : MonoBehaviour
 {
     private void Awake()
     {
-        //Test to see if AudioManager loads the song on start
-        AudioManager.PlaySong(eSongs.song1);
+        //Plays the main menu song the moment the Front End is loaded, and it stops whatever music track was playing.
+        AudioManager.PlaySong(eSongs.mainMenu);
     }
     public void OnPlayPressed()
     {
@@ -16,9 +16,10 @@ public class FrontEnd : MonoBehaviour
     }
     public void OnOptionsPressed()
     {
-        //"OnOptionsPressed()" displays the Options menu (CURRENTLY WIP)
+        //"OnOptionsPressed()" shows the Options menu.
+        CanvasManager.Instance.ShowOptions();
+        AudioManager.PlaySong(eSongs.options);
         AudioManager.PlayEffect(eEffects.click);
-        Debug.Log("<color=yellow>Options pressed. WIP</color>");
     }
     public void OnExtrasPressed()
     {

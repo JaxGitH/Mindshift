@@ -1,6 +1,6 @@
 using UnityEngine;
 //This script lets the World Select screen show each Level Select once you click it.
-//Last updated: 1/30/25
+//Last updated: 2/20/25
 public class SelectWorld : MonoBehaviour
 {
     public void OnWorld1Pressed()
