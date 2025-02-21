@@ -10,7 +10,6 @@ public class LoadingScreen : MonoBehaviour
     public static LoadingScreen Instance;
     public GameObject loadingScreen;
     public Image loadingBarFill;
-
     public void Awake()
     {
         if (Instance != null && Instance != this)
