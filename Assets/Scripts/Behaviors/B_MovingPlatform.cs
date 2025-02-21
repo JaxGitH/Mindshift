@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using Lightbug.CharacterControllerPro.Core;
+using Mindshift.CharacterControllerPro.Core;
 
 namespace Mindshift
 {

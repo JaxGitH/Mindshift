@@ -293,7 +293,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5608737337644725019}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0561f9d7013063e4fb544986258ce519, type: 3}
+  m_Script: {fileID: 11500000, guid: 7703ec845502c624098609712fd66e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   breakForce: 15000
@@ -330,3 +330,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isResettable: 1
+  isDragging: 0

@@ -13,6 +13,66 @@ MonoBehaviour:
   m_Name: SoundLibrary
   m_EditorClassIdentifier: 
   effects:
-  - {fileID: 8300000, guid: 5dcd8ccd209ca8845923941ce2b5af0f, type: 3}
+  - {fileID: 8300000, guid: d3f4669b32b12674995e7e75dda01b7c, type: 3}
+  - {fileID: 8300000, guid: d3f4669b32b12674995e7e75dda01b7c, type: 3}
+  - {fileID: 8300000, guid: d3f4669b32b12674995e7e75dda01b7c, type: 3}
+  - {fileID: 8300000, guid: d3f4669b32b12674995e7e75dda01b7c, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   songs:
-  - {fileID: 8300000, guid: 6e2c67b1ccd06834f8bd62ed2a14b6d9, type: 3}
+  - {fileID: 8300000, guid: d434c58bbd762ee46a4126c969105acb, type: 3}
+  - {fileID: 8300000, guid: ffa13840d7472e7468c98c6df5a29c03, type: 3}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: 134bfc36229065f4c95b7847b2445d9b, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

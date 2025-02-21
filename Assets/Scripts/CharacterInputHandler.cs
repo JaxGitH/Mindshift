@@ -1,57 +1,106 @@
-using UnityEngine;
-using UnityEngine.InputSystem; // New Input System
-using Lightbug.CharacterControllerPro.Core;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
+using Mindshift.CharacterControllerPro.Core;
 
-public class CharacterInputHandler : MonoBehaviour
+namespace Mindshift
 {
-    [SerializeField] private CharacterActor characterActor;
-    public Joystick joystick;  // On-screen joystick reference
-    public float moveSpeed = 5f;
-    public float jumpForce = 10f;
-
-    private void Awake()
+    public class CharacterInputHandler : MonoBehaviour
     {
-        characterActor = GetComponent<CharacterActor>();
-        
+        public static CharacterInputHandler Instance;
 
-    }
+        [SerializeField] private CharacterActor characterActor;
+        [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] private float jumpForce = 10f;
 
-    private void FixedUpdate()
-    {               
+        [Header("Joystick Reference")]
+        [SerializeField] private VariableJoystick joystick;
 
-        // Read joystick input (if joystick exists)
-        float horizontalInput = joystick != null ? joystick.Horizontal : 0f;
-//        float verticalInput = joystick != null ? joystick.Vertical : 0f;
+        private PlayerInputActions inputActions;
+        private Vector2 moveInput;
 
-        // Read keyboard input (WASD / Arrow Keys)
-        horizontalInput += Keyboard.current != null ? Keyboard.current.aKey.isPressed ? -1 : Keyboard.current.dKey.isPressed ? 1 : 0 : 0;
-//        verticalInput += Keyboard.current != null ? Keyboard.current.sKey.isPressed ? -1 : Keyboard.current.wKey.isPressed ? 1 : 0 : 0;
-
-        // Normalize input to prevent diagonal speed boost
-        Vector2 moveInput = new Vector2(horizontalInput, 0).normalized;
-
-        // Convert 2D input into a 3D movement direction
-        Vector3 movementDirection = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed;
-
-        characterActor.Velocity = new Vector3(movementDirection.x, characterActor.Velocity.y, movementDirection.z);
-        // Apply movement to CharacterActor
-        
-        if (characterActor == null) return;
-       
-
-
-        // Jump Handling
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        private void Awake()
         {
-            Jump();
+            characterActor = GetComponent<CharacterActor>();
+
+            inputActions = new PlayerInputActions();
+
+            // ✅ Movement Input - Disables mouse click when active
+            inputActions.GamePlay.Move.performed += ctx =>
+            {
+                moveInput = ctx.ReadValue<Vector2>();
+                GameStateManager.Instance.IsKeyboardInputActive = moveInput.magnitude > 0.1f;
+            };
+
+            inputActions.GamePlay.Move.canceled += _ =>
+            {
+                moveInput = Vector2.zero;
+                GameStateManager.Instance.IsKeyboardInputActive = false;
+            };
+
+            // ✅ Left Click Action - Only allowed if no movement input
+            inputActions.GamePlay.Click.performed += _ =>
+            {
+                if (GameStateManager.Instance.CanUseMouseInput())
+                {
+                    HandleMouseClick();
+                }
+            };
+
+            if (joystick == null)
+            {
+                Debug.LogWarning("VariableJoystick is not assigned in CharacterInputHandler.");
+            }
         }
-    }
 
-    public void Jump()
-    {
-        if (characterActor.IsGrounded)
+        private void OnEnable()
         {
-            characterActor.Velocity += Vector3.up * jumpForce;
+            inputActions.GamePlay.Enable();
+        }
+
+        private void OnDisable()
+        {
+            inputActions.GamePlay.Disable();
+        }
+
+        private void FixedUpdate()
+        {
+            if (characterActor == null) return;
+
+            if (GameStateManager.Instance.IsDraggingObject) return;
+
+            Vector2 joystickInput = joystick != null ? joystick.Direction : Vector2.zero;
+            Vector2 finalInput = joystickInput.magnitude > 0.1f ? joystickInput : moveInput;
+
+            Vector3 movementDirection = new Vector3(finalInput.x, 0, finalInput.y) * moveSpeed;
+            characterActor.Velocity = new Vector3(movementDirection.x, characterActor.Velocity.y, movementDirection.z);
+        }
+
+        // ✅ Mouse Click Handler
+        private void HandleMouseClick()
+        {
+            Debug.Log("Mouse click processed!");
+        }
+
+        // ✅ Determine if mouse input should be used based on GameStateManager
+        public bool CanUseMouseInput()
+        {
+            return GameStateManager.Instance.CanUseMouseInput();
+        }
+
+        public bool IsPlayerMoving()
+        {
+            return moveInput.magnitude > 0.1f;
+        }
+
+        public bool IsMovementInputActive()
+        {
+            return moveInput.magnitude > 0.1f || (joystick != null && joystick.Direction.magnitude > 0.1f);
+        }
+
+        public void ResetMovement()
+        {
+            moveInput = Vector2.zero;
+            GameStateManager.Instance.IsKeyboardInputActive = false;
         }
     }
 }
