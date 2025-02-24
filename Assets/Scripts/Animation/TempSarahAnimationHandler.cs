@@ -28,4 +28,10 @@ public class TempSarahAnimationHandler : MonoBehaviour
         animator.SetBool("isGrounded", characterActor.IsGrounded);
         //characterActor.isKinematic
     }
+
+    public void ResetClimbState()
+    {
+        characterActor.ResetClimbState();
+
+    }
 }

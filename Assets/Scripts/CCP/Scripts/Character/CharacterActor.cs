@@ -194,6 +194,16 @@ namespace Mindshift.CharacterControllerPro.Core
         [SerializeField] private Vector3 lastCheckpointPos;
         [SerializeField] private int lastCheckpointNum;
 
+        [Header("Climbing")]
+        public Animator animator;
+        public LayerMask obstacleLayer;
+        public float shortClimbThreshold = 0.6f;
+        public float highClimbHeight = 1.4f;
+        public float noClimbHeight = 1.7f;
+        //public bool UseRootMotion = false;
+
+        private Rigidbody rb;
+
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
         public enum SizeReferenceType
@@ -261,6 +271,8 @@ namespace Mindshift.CharacterControllerPro.Core
             {
                 GameStateManager.Instance.RegisterKeyboardJoystickInput();
             }
+
+            DetectObstacleAndClimb();
 
             // Movement logic here...
         }
@@ -866,6 +878,7 @@ namespace Mindshift.CharacterControllerPro.Core
                 ForceGrounded();
 
             SetColliderSize();
+            rb = GetComponent<Rigidbody>();
         }
 
         protected override void OnEnable()
@@ -2615,6 +2628,104 @@ namespace Mindshift.CharacterControllerPro.Core
             );
 
             Gizmos.matrix = Matrix4x4.identity;
+        }
+
+        /*void DetectObstacleAndClimb()
+        {
+            RaycastHit hit;
+            Vector3 origin = transform.position + Vector3.up * 0.5f;
+            Vector3 direction = transform.forward;
+            float maxDistance = 1.0f;
+
+            if (Physics.Raycast(origin, direction, out hit, maxDistance, obstacleLayer))
+            {
+                float obstacleHeight = hit.point.y - transform.position.y;
+
+                if (obstacleHeight > 0 && obstacleHeight <= maxClimbHeight)
+                {
+                    TriggerClimb(obstacleHeight);
+                }
+            }
+        }*/
+
+        /*void DetectObstacleAndClimb()
+        {
+            RaycastHit hit;
+            Vector3 origin = transform.position + Vector3.up * 0.5f; // Start ray slightly above ground
+            Vector3 direction = transform.forward;
+            float maxDistance = 1.0f;
+
+            if (Physics.Raycast(origin, direction, out hit, maxDistance, obstacleLayer))
+            {
+                float characterFootLevel = transform.position.y; // Bottom of the character
+                float obstacleTop = hit.collider.bounds.max.y; // Top of the detected obstacle
+                float obstacleHeight = obstacleTop - characterFootLevel; // Correct height comparison
+
+                Debug.Log($"Obstacle Height: {obstacleHeight}, Short Threshold: {shortClimbThreshold}, Max Height: {maxClimbHeight}");
+
+                if (obstacleHeight > 0 && obstacleHeight <= maxClimbHeight)
+                {
+                    TriggerClimb(obstacleHeight);
+                }
+            }
+        }*/
+
+        void DetectObstacleAndClimb()
+        {
+            RaycastHit hit;
+            Vector3 origin = transform.position + Vector3.up * (shortClimbThreshold - 0.05f);
+            Debug.DrawRay(origin, transform.forward, Color.red, 1f);
+            Debug.DrawRay(transform.position + Vector3.up * (highClimbHeight - 0.05f), transform.forward, Color.green, 1f);
+            if (Physics.Raycast(origin, transform.forward, out hit, 1f, obstacleLayer))
+            {
+                Vector3 highCheck = transform.position + Vector3.up * (highClimbHeight - 0.05f);
+                
+                if (Physics.Raycast(highCheck, transform.forward, out hit, 1f, obstacleLayer))
+                {
+                    Vector3 wallCheck = transform.position + Vector3.up * noClimbHeight;
+                    if (Physics.Raycast(wallCheck, transform.forward, out hit, 1f, obstacleLayer))
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        TriggerClimb(highClimbHeight);
+                    }
+                    
+                }
+                else
+                {
+                    TriggerClimb(shortClimbThreshold);
+                }
+            }
+        }
+
+        void TriggerClimb(float obstacleHeight)
+        {
+            UseRootMotion = true;
+            rb.isKinematic = true;
+
+            if (obstacleHeight <= shortClimbThreshold)
+            {
+                //animator.SetBool("LowClimb",true);
+                Debug.Log("LowClimb triggered.");
+                animator.SetBool("LowClimb", true);
+            }
+            else
+            {
+                //animator.SetBool("HighClimb", true);
+                Debug.Log("HighClimb triggered.");
+                animator.SetBool("HighClimb", true);
+            }
+        }
+
+        public void ResetClimbState()
+        {
+            UseRootMotion = false;
+            rb.isKinematic = false;
+            animator.SetBool("LowClimb", false);
+            animator.SetBool("HighClimb", false);
+
         }
     }
 }
