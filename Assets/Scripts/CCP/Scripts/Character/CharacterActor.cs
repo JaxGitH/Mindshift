@@ -196,6 +196,7 @@ namespace Mindshift.CharacterControllerPro.Core
 
         [Header("Climbing")]
         public Animator animator;
+        private CapsuleCollider colliderCap;
         public LayerMask obstacleLayer;
         public float shortClimbThreshold = 0.6f;
         public float highClimbHeight = 1.4f;
@@ -879,6 +880,7 @@ namespace Mindshift.CharacterControllerPro.Core
 
             SetColliderSize();
             rb = GetComponent<Rigidbody>();
+            characterBody = GetComponent<CharacterBody>();
         }
 
         protected override void OnEnable()
@@ -2630,46 +2632,6 @@ namespace Mindshift.CharacterControllerPro.Core
             Gizmos.matrix = Matrix4x4.identity;
         }
 
-        /*void DetectObstacleAndClimb()
-        {
-            RaycastHit hit;
-            Vector3 origin = transform.position + Vector3.up * 0.5f;
-            Vector3 direction = transform.forward;
-            float maxDistance = 1.0f;
-
-            if (Physics.Raycast(origin, direction, out hit, maxDistance, obstacleLayer))
-            {
-                float obstacleHeight = hit.point.y - transform.position.y;
-
-                if (obstacleHeight > 0 && obstacleHeight <= maxClimbHeight)
-                {
-                    TriggerClimb(obstacleHeight);
-                }
-            }
-        }*/
-
-        /*void DetectObstacleAndClimb()
-        {
-            RaycastHit hit;
-            Vector3 origin = transform.position + Vector3.up * 0.5f; // Start ray slightly above ground
-            Vector3 direction = transform.forward;
-            float maxDistance = 1.0f;
-
-            if (Physics.Raycast(origin, direction, out hit, maxDistance, obstacleLayer))
-            {
-                float characterFootLevel = transform.position.y; // Bottom of the character
-                float obstacleTop = hit.collider.bounds.max.y; // Top of the detected obstacle
-                float obstacleHeight = obstacleTop - characterFootLevel; // Correct height comparison
-
-                Debug.Log($"Obstacle Height: {obstacleHeight}, Short Threshold: {shortClimbThreshold}, Max Height: {maxClimbHeight}");
-
-                if (obstacleHeight > 0 && obstacleHeight <= maxClimbHeight)
-                {
-                    TriggerClimb(obstacleHeight);
-                }
-            }
-        }*/
-
         void DetectObstacleAndClimb()
         {
             RaycastHit hit;
@@ -2697,6 +2659,17 @@ namespace Mindshift.CharacterControllerPro.Core
                 {
                     TriggerClimb(shortClimbThreshold);
                 }
+            }
+        }
+
+        void DetectLedges()
+        {
+            RaycastHit hit;
+            Vector3 forwardStart = new Vector3(0, 0.1f, Vector3.forward.z * colliderCap.radius);
+            Vector3 origin = transform.position + forwardStart;
+            if (Physics.Raycast(origin, transform.forward, out hit, 1f, obstacleLayer))
+            {
+
             }
         }
 
