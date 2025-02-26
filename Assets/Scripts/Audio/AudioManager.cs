@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 // This script handles the AudioManager, volume sliders and the "play sound effect" method.
-// Last updated: 2/19/25
+// Last updated: 2/25/25
 public enum eMixers { music, effects }
 public class AudioManager : MonoBehaviour
 {
@@ -59,7 +59,19 @@ public class AudioManager : MonoBehaviour
     }
     public static void ResumeLevelSong()
     {
-        PlaySong(eSongs.sterileMusic);
+        //This is for resuming mid-level music depending on the level.
+        if (SceneMgr.sceneString == "zone1Level2")
+        {
+            PlaySong(eSongs.sterileMusic);
+        }
+        else if (SceneMgr.sceneString == "InsertCryoLevelNameHere")
+        {
+            PlaySong(eSongs.cryoMusic);
+        }
+        else if (SceneMgr.sceneString == "InsertRadioactiveLevelNameHere")
+        {
+            PlaySong(eSongs.radioactiveMusic);
+        }    
         Instance.BGM.time = currentSongPosition;
         Instance.BGM.UnPause();
     }
