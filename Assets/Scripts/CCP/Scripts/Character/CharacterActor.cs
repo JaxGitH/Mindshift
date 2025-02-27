@@ -198,11 +198,8 @@ namespace Mindshift.CharacterControllerPro.Core
 
         [Header("Climbing")]
         public Animator animator;
-<<<<<<< Updated upstream
         private CapsuleCollider colliderCap;
-=======
         private CharacterBody characterBody;
->>>>>>> Stashed changes
         public LayerMask obstacleLayer;
         public float shortClimbThreshold = 0.6f;
         public float highClimbHeight = 1.4f;
@@ -2660,16 +2657,7 @@ namespace Mindshift.CharacterControllerPro.Core
             }
         }
 
-<<<<<<< Updated upstream
-        void DetectLedges()
-        {
-            RaycastHit hit;
-            Vector3 forwardStart = new Vector3(0, 0.1f, Vector3.forward.z * colliderCap.radius);
-            Vector3 origin = transform.position + forwardStart;
-            if (Physics.Raycast(origin, transform.forward, out hit, 1f, obstacleLayer))
-            {
 
-=======
         void DetectLedge()
         {
             RaycastHit hit;
@@ -2688,7 +2676,6 @@ namespace Mindshift.CharacterControllerPro.Core
             else if (IsGrounded && Velocity.magnitude > 0.3)
             {
                 LedgeJump();
->>>>>>> Stashed changes
             }
         }
 
