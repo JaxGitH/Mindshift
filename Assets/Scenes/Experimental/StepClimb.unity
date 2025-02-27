@@ -562,7 +562,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterActor: {fileID: 420584615}
+  maxMoveSpeed: 5
   moveSpeed: 5
+  inAirControl: 0.532
   jumpForce: 10
   joystick: {fileID: 0}
 --- !u!114 &420584615 stripped
@@ -2422,11 +2424,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4380948687472380952, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 4380948687472380952, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4380948687472380952, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2768,6 +2770,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 2089294230}
+    - target: {fileID: 7332918590725698487, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
+      propertyPath: jumpForce
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7332918590725698487, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
       propertyPath: maxClimbHeight
       value: 1.4

@@ -9,7 +9,10 @@ namespace Mindshift
         public static CharacterInputHandler Instance;
 
         [SerializeField] private CharacterActor characterActor;
+        [SerializeField] private float maxMoveSpeed = 5f;
         [SerializeField] private float moveSpeed = 5f;
+        [Range(0f, 1f)]
+        [SerializeField] private float inAirControl = 0.5f;
         [SerializeField] private float jumpForce = 10f;
 
         [Header("Joystick Reference")]
@@ -50,6 +53,8 @@ namespace Mindshift
             {
                 Debug.LogWarning("VariableJoystick is not assigned in CharacterInputHandler.");
             }
+
+            moveSpeed = maxMoveSpeed;
         }
 
         private void OnEnable()
@@ -68,10 +73,19 @@ namespace Mindshift
 
             if (GameStateManager.Instance.IsDraggingObject) return;
 
+            if (characterActor.isKinematic) return;
+
             Vector2 joystickInput = joystick != null ? joystick.Direction : Vector2.zero;
             Vector2 finalInput = joystickInput.magnitude > 0.1f ? joystickInput : moveInput;
 
-            Vector3 movementDirection = new Vector3(finalInput.x, 0, finalInput.y) * moveSpeed;
+            if (!characterActor.IsGrounded)
+            {
+                moveSpeed = maxMoveSpeed * inAirControl;
+            }
+            else moveSpeed = maxMoveSpeed;
+            
+            Vector3 movementDirection = new Vector3(finalInput.x * moveSpeed, 0, finalInput.y * moveSpeed);
+
             characterActor.Velocity = new Vector3(movementDirection.x, characterActor.Velocity.y, movementDirection.z);
         }
 

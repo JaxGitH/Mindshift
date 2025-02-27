@@ -4,6 +4,8 @@ using UnityEngine;
 using Mindshift.Utilities;
 using System.Runtime.CompilerServices;
 using System.Collections;
+using UnityEditor.Timeline;
+using UnityEngine.TextCore.Text;
 
 namespace Mindshift.CharacterControllerPro.Core
 {
@@ -196,11 +198,18 @@ namespace Mindshift.CharacterControllerPro.Core
 
         [Header("Climbing")]
         public Animator animator;
+<<<<<<< Updated upstream
         private CapsuleCollider colliderCap;
+=======
+        private CharacterBody characterBody;
+>>>>>>> Stashed changes
         public LayerMask obstacleLayer;
         public float shortClimbThreshold = 0.6f;
         public float highClimbHeight = 1.4f;
         public float noClimbHeight = 1.7f;
+        [SerializeField] private float ledgeCheckDistance = 0.1f;
+        [SerializeField] float jumpForce = 3f;
+
         //public bool UseRootMotion = false;
 
         private Rigidbody rb;
@@ -274,6 +283,7 @@ namespace Mindshift.CharacterControllerPro.Core
             }
 
             DetectObstacleAndClimb();
+            DetectLedge();
 
             // Movement logic here...
         }
@@ -1435,52 +1445,40 @@ namespace Mindshift.CharacterControllerPro.Core
 
         void PostSimulationVelocityUpdate()
         {
-            if (IsStable)
+            if (isKinematic)
             {
-                switch (stablePostSimulationVelocity)
-                {
-                    case CharacterVelocityMode.UseInputVelocity:
-
-                        Velocity = InputVelocity;
-
-                        break;
-                    case CharacterVelocityMode.UsePreSimulationVelocity:
-
-                        Velocity = PreSimulationVelocity;
-
-                        // Take the rigidbody velocity and convert it into planar velocity
-                        if (WasStable)
-                            PlanarVelocity = CustomUtilities.Multiply(Vector3.Normalize(PlanarVelocity), Velocity.magnitude);
-
-                        break;
-                    case CharacterVelocityMode.UsePostSimulationVelocity:
-
-                        // Take the rigidbody velocity and convert it into planar velocity
-                        if (WasStable)
-                            PlanarVelocity = CustomUtilities.Multiply(Vector3.Normalize(PlanarVelocity), Velocity.magnitude);
-
-                        break;
-                }
-
-                UpdateGroundVelocity();
+                return;
             }
-            else
+
+            if (!rb.isKinematic) // Prevent setting velocity if kinematic
             {
-                switch (unstablePostSimulationVelocity)
+                if (IsStable)
                 {
-                    case CharacterVelocityMode.UseInputVelocity:
-
-                        Velocity = InputVelocity;
-
-                        break;
-                    case CharacterVelocityMode.UsePreSimulationVelocity:
-
-                        Velocity = PreSimulationVelocity;
-
-                        break;
-                    case CharacterVelocityMode.UsePostSimulationVelocity:
-
-                        break;
+                    switch (stablePostSimulationVelocity)
+                    {
+                        case CharacterVelocityMode.UseInputVelocity:
+                            Velocity = InputVelocity;
+                            break;
+                        case CharacterVelocityMode.UsePreSimulationVelocity:
+                            Velocity = PreSimulationVelocity;
+                            break;
+                        case CharacterVelocityMode.UsePostSimulationVelocity:
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (unstablePostSimulationVelocity)
+                    {
+                        case CharacterVelocityMode.UseInputVelocity:
+                            Velocity = InputVelocity;
+                            break;
+                        case CharacterVelocityMode.UsePreSimulationVelocity:
+                            Velocity = PreSimulationVelocity;
+                            break;
+                        case CharacterVelocityMode.UsePostSimulationVelocity:
+                            break;
+                    }
                 }
             }
 
@@ -2662,6 +2660,7 @@ namespace Mindshift.CharacterControllerPro.Core
             }
         }
 
+<<<<<<< Updated upstream
         void DetectLedges()
         {
             RaycastHit hit;
@@ -2670,12 +2669,33 @@ namespace Mindshift.CharacterControllerPro.Core
             if (Physics.Raycast(origin, transform.forward, out hit, 1f, obstacleLayer))
             {
 
+=======
+        void DetectLedge()
+        {
+            RaycastHit hit;
+            float capRadius = characterBody.BodySize.x / 2;
+            Vector3 offset = new Vector3(0, 0.1f, 0);
+            Vector3 origin = transform.position + (transform.forward * capRadius) + offset;
+
+            Debug.DrawRay(origin, Vector3.down, Color.yellow, noClimbHeight);
+            if (Physics.Raycast(origin, Vector3.down, out hit, noClimbHeight, obstacleLayer))
+            {
+                if (IsGrounded && obstacleLayer == LayerMask.NameToLayer("Hazard") && Velocity.magnitude > 0.3)
+                {
+                    LedgeJump();
+                }
+            }
+            else if (IsGrounded && Velocity.magnitude > 0.3)
+            {
+                LedgeJump();
+>>>>>>> Stashed changes
             }
         }
 
         void TriggerClimb(float obstacleHeight)
         {
             UseRootMotion = true;
+            isKinematic = true;
             rb.isKinematic = true;
 
             if (obstacleHeight <= shortClimbThreshold)
@@ -2692,9 +2712,27 @@ namespace Mindshift.CharacterControllerPro.Core
             }
         }
 
+        void LedgeJump()
+        {
+            //Debug.Log("LedgeJump Triggered");
+            //rb.AddForce(Vector3.up * jumpForce);
+
+            // Ensure the character is not grounded before applying bounce
+            ForceNotGrounded();
+
+            // Boost bounce effect if the player is falling
+            float appliedBouncePower = (Velocity.y < 0) ? jumpForce : jumpForce;
+
+            // Apply the bounce force while keeping horizontal momentum
+            Vector3 newVelocity = Velocity;
+            newVelocity.y = appliedBouncePower;
+            Velocity = newVelocity;
+        }
+
         public void ResetClimbState()
         {
             UseRootMotion = false;
+            isKinematic = false;
             rb.isKinematic = false;
             animator.SetBool("LowClimb", false);
             animator.SetBool("HighClimb", false);
