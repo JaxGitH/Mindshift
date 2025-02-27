@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4380948687472380952}
   - component: {fileID: 6332609997521659103}
   - component: {fileID: 7332918590725698487}
-  - component: {fileID: 1130502960088706054}
+  - component: {fileID: 381575944380363343}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -153,7 +153,16 @@ MonoBehaviour:
   angularDrag: 0
   lastCheckpointPos: {x: 0, y: 0, z: 0}
   lastCheckpointNum: 0
---- !u!114 &1130502960088706054
+  animator: {fileID: 5993588173969040513}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  shortClimbThreshold: 0.6
+  highClimbHeight: 1.4
+  noClimbHeight: 1.7
+  ledgeCheckDistance: 0.1
+  jumpForce: 5
+--- !u!114 &381575944380363343
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,11 +171,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6212494695008601475}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ade212db7cec3944fbd0e7c02cb5d4f1, type: 3}
+  m_Script: {fileID: 11500000, guid: d2b13df7f0d90fa40b09922dced2535f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterActor: {fileID: 0}
+  characterActor: {fileID: 7332918590725698487}
+  maxMoveSpeed: 5
   moveSpeed: 5
+  inAirControl: 0.5
   jumpForce: 10
   joystick: {fileID: 0}
 --- !u!1 &7242032703721027161
@@ -354,3 +365,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterActor: {fileID: 7332918590725698487}
+--- !u!95 &5993588173969040513 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: ba91331e134500445bf161d7d484f1a0, type: 3}
+  m_PrefabInstance: {fileID: 164123111437408528}
+  m_PrefabAsset: {fileID: 0}
