@@ -207,6 +207,16 @@ namespace Mindshift.CharacterControllerPro.Core
         [SerializeField] private float ledgeCheckDistance = 0.1f;
         [SerializeField] float jumpForce = 3f;
 
+        [Header("Rotation")]
+        [Tooltip("Should the character rotate to face the direction of movement?")]
+        public bool rotateToMovementDirection = true;
+
+        [Tooltip("How quickly the character rotates to face the movement direction (degrees per second).")]
+        public float rotationSpeed = 360f; // Adjust this value for faster/slower rotation
+
+        [Tooltip("If true, the character instantly snaps to the movement direction instead of smoothly rotating.")]
+        public bool instantRotation = false;
+
         //public bool UseRootMotion = false;
 
         private Rigidbody rb;
@@ -1172,7 +1182,7 @@ namespace Mindshift.CharacterControllerPro.Core
                 groundTriggerCollider3D.enabled = useGroundTrigger;
         }
 
-        protected override void PostSimulationUpdate(float dt)
+        /*protected override void PostSimulationUpdate(float dt)
         {
             HandleRotation();
             GetContactsInformation();
@@ -1206,6 +1216,75 @@ namespace Mindshift.CharacterControllerPro.Core
             PostSimulationVelocityUpdate();
             UpdateTimers(dt);
             UpdatePostSimulationFlags();
+        }*/
+
+        protected override void PostSimulationUpdate(float dt)
+        {
+            HandleRotation(); // Existing rotation logic for up direction
+            GetContactsInformation();
+
+            PostSimulationVelocity = Velocity;
+            ExternalVelocity = PostSimulationVelocity - PreSimulationVelocity;
+
+            PreGroundProbingPosition = PostGroundProbingPosition = Position;
+            if (!IsKinematic)
+            {
+                if (!IsStable)
+                {
+                    Vector3 position = Position;
+                    UnstableProbeGround(ref position, dt);
+                    SetDynamicGroundData(position);
+                    Position = position;
+                }
+
+                if (IsStable)
+                {
+                    ProcessDynamicGroundMovement(dt);
+
+                    PreGroundProbingPosition = Position;
+                    ProbeGround(dt);
+                    PostGroundProbingPosition = Position;
+                }
+            }
+
+            GroundProbingDisplacement = PostGroundProbingPosition - PreGroundProbingPosition;
+
+            // Add rotation to movement direction
+            if (rotateToMovementDirection)
+            {
+                RotateToMovementDirection(dt);
+            }
+
+            PostSimulationVelocityUpdate();
+            UpdateTimers(dt);
+            UpdatePostSimulationFlags();
+        }
+
+        private void RotateToMovementDirection(float dt)
+        {
+            // Get the planar velocity (ignore vertical movement)
+            Vector3 planarVelocity = Vector3.ProjectOnPlane(Velocity, Up);
+
+            // Only rotate if there's significant movement
+            if (planarVelocity.sqrMagnitude > 0.01f) // Adjust threshold as needed
+            {
+                // Calculate the target direction
+                Vector3 targetDirection = planarVelocity.normalized;
+
+                // Calculate the target rotation
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Up);
+
+                if (instantRotation)
+                {
+                    // Instantly set the rotation
+                    Rotation = targetRotation;
+                }
+                else
+                {
+                    // Smoothly interpolate to the target rotation
+                    Rotation = Quaternion.RotateTowards(Rotation, targetRotation, rotationSpeed * dt);
+                }
+            }
         }
 
         void UpdateStabilityFlags()
