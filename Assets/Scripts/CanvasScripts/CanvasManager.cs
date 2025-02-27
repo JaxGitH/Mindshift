@@ -12,7 +12,7 @@ public class CanvasManager : MonoBehaviour
     {
         //Shows the "Front End" canvas.
         Instantiate(Resources.Load("Canvas/" + "Canvas_FE") as GameObject);
-        SceneMgr.sceneString = "FrontEnd";
+        //SceneMgr.sceneString = "FrontEnd";
     }
     public void ShowSelectWorld()
     {
@@ -34,14 +34,12 @@ public class CanvasManager : MonoBehaviour
         //Shows World 3's levels
         Instantiate(Resources.Load("Canvas/" + "Canvas_SelectLevel3") as GameObject);
     }
-    // v TO BE DELETED SOON v -Luis M.
-    /*public void ShowCanvasHUD()
+    public void ShowCanvas_HUD()
     {
         //Shows the Hud, which holds the pause button and the joystick.
         Instantiate(Resources.Load("Canvas/" + "Canvas_Hud") as GameObject);
-        SceneMgr.sceneString = "zone1Level2";
-        Debug.Log(SceneMgr.sceneString);
-    }*/
+        //SceneMgr.sceneString = "zone1Level2";
+    }
     public void ShowPause()
     {
         //Shows the pause menu

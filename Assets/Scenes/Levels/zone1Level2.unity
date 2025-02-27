@@ -5920,21 +5920,24 @@ PrefabInstance:
     - target: {fileID: 7332918590725698487, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
       propertyPath: animator
       value: 
-<<<<<<< Updated upstream
+
       objectReference: {fileID: 1050899176}
-=======
       objectReference: {fileID: 1770626904}
     - target: {fileID: 7332918590725698487, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
       propertyPath: jumpForce
       value: 5
       objectReference: {fileID: 0}
->>>>>>> Stashed changes
+
+      objectReference: {fileID: 1215731592}
     - target: {fileID: 7332918590725698487, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
       propertyPath: obstacleLayer.m_Bits
       value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1130502960088706054, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
+
+    m_RemovedComponents: []
+
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -6355,6 +6358,11 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3594321940762771476, guid: c3f483982dbba4141bd690fef45939ad, type: 3}
   m_PrefabInstance: {fileID: 1205267483}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1215731592 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5993588173969040513, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
+  m_PrefabInstance: {fileID: 1121440067}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1220396459 stripped
 GameObject:
@@ -7288,6 +7296,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02d70045a03b0634bbf9d8dcd31d176d, type: 3}
+--- !u!1 &1402707453 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6212494695008601475, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
+  m_PrefabInstance: {fileID: 1121440067}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1434161526
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9279,11 +9292,13 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7332918590725698487, guid: 5fe13c2f0ca4734409d30b9bad833aeb, type: 3}
   m_PrefabInstance: {fileID: 1121440067}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
+
+
   m_GameObject: {fileID: 448823612}
-=======
+
   m_GameObject: {fileID: 947009415}
->>>>>>> Stashed changes
+
+  m_GameObject: {fileID: 1402707453}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f199f35221ef584d909e881238cba74, type: 3}
@@ -9300,25 +9315,30 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
+
+
   m_GameObject: {fileID: 448823612}
-=======
+
   m_GameObject: {fileID: 947009415}
->>>>>>> Stashed changes
+
+  m_GameObject: {fileID: 1402707453}
+
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2b13df7f0d90fa40b09922dced2535f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
+
   characterActor: {fileID: 1955550850}
   moveSpeed: 5
-=======
+
   characterActor: {fileID: 0}
   maxMoveSpeed: 5
   moveSpeed: 5
   inAirControl: 0.5
->>>>>>> Stashed changes
+
+  characterActor: {fileID: 0}
+  moveSpeed: 5
   jumpForce: 10
   joystick: {fileID: 0}
 --- !u!1001 &1960621695
@@ -10309,9 +10329,8 @@ SceneRoots:
   - {fileID: 180751788}
   - {fileID: 1706585215}
   - {fileID: 1545421080}
-<<<<<<< Updated upstream
   - {fileID: 1436926592}
-=======
+
   - {fileID: 925808301}
   - {fileID: 137716101}
->>>>>>> Stashed changes
+

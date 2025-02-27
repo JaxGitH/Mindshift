@@ -69,10 +69,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   songs:
-  - {fileID: 8300000, guid: d434c58bbd762ee46a4126c969105acb, type: 3}
+  - {fileID: 8300000, guid: 1d9fd21b5c2059445a04285de6ec8831, type: 3}
   - {fileID: 8300000, guid: ffa13840d7472e7468c98c6df5a29c03, type: 3}
-  - {fileID: 0}
-  - {fileID: 8300000, guid: 134bfc36229065f4c95b7847b2445d9b, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 77330d8d48fca8b469085f233b2bdd10, type: 3}
+  - {fileID: 8300000, guid: 27d313bd098a23246a5852e17143c936, type: 3}
+  - {fileID: 8300000, guid: 711690af2224a1746ae66982811093a2, type: 3}
   - {fileID: 0}
   - {fileID: 0}
