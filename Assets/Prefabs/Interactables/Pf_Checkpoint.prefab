@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 27857038267496515}
   - component: {fileID: 3937321841811836203}
   - component: {fileID: 2656931204271135650}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Prism
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 3594321940762771476}
   - component: {fileID: 5816730120227865121}
   - component: {fileID: 7450631794751833276}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Pf_Checkpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 7572224470037198937}
   - component: {fileID: 7865894331683982003}
   - component: {fileID: 7965583619109161249}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

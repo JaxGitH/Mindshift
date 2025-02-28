@@ -132,6 +132,8 @@ MonoBehaviour:
   inheritedGroundVerticalVelocityMultiplier: 1
   slideOnWalls: 1
   resetVelocityOnTeleport: 1
+  airControl: 0.3
+  airDrag: 50
   stablePostSimulationVelocity: 2
   unstablePostSimulationVelocity: 2
   constraintRotation: 1
@@ -156,12 +158,15 @@ MonoBehaviour:
   animator: {fileID: 5993588173969040513}
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8187
   shortClimbThreshold: 0.6
   highClimbHeight: 1.4
   noClimbHeight: 1.7
   ledgeCheckDistance: 0.1
   jumpForce: 3
+  rotateToMovementDirection: 1
+  rotationSpeed: 360
+  instantRotation: 1
 --- !u!114 &1130502960088706054
 MonoBehaviour:
   m_ObjectHideFlags: 0

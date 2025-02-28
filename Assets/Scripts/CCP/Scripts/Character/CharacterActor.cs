@@ -131,13 +131,20 @@ namespace Mindshift.CharacterControllerPro.Core
         public float inheritedGroundVerticalVelocityMultiplier = 1f;
 
         [Header("Velocity")]
-
         [Tooltip("Whether or not to project the initial velocity (stable) onto walls.")]
         [SerializeField]
         public bool slideOnWalls = true;
 
         [SerializeField]
         bool resetVelocityOnTeleport = true;
+
+        [Tooltip("Controls how much influence input has on movement while in the air. 0 = no control, 1 = full control.")]
+        [Range(0f, 1f)]
+        public float airControl = 0.5f;
+
+        [Tooltip("Rate at which horizontal speed (X and Z axes) slows down while in the air. Higher values mean faster deceleration.")]
+        [Min(0f)]
+        public float airDrag = 2f; // New field for air slowdown, adjust as needed
 
         [Tooltip("Should the actor re-assign the rigidbody velocity after the simulation is done?\n\n" +
         "PreSimulationVelocity: the character uses the velocity prior to the simulation (modified by this component).\nPostSimulationVelocity: the character uses the velocity received from the simulation (no re-assignment).\nInputVelocity: the character \"gets back\" its initial velocity (before being modified by this component).")]
@@ -1731,10 +1738,47 @@ namespace Mindshift.CharacterControllerPro.Core
             }
         }
 
+        /*void ProcessUnstableMovement(float dt, ref Vector3 position)
+        {
+            ProcessInheritedVelocity();
+
+            Vector3 displacement = CustomUtilities.Multiply(Velocity, dt);
+            UnstableCollideAndSlide(ref position, displacement, dt);
+        }*/
+
         void ProcessUnstableMovement(float dt, ref Vector3 position)
         {
             ProcessInheritedVelocity();
 
+            // Store the initial velocity before modification
+            Vector3 currentVelocity = Velocity;
+
+            // Extract planar and vertical components
+            Vector3 currentVelocityPlanar = Vector3.ProjectOnPlane(currentVelocity, Up);
+            Vector3 verticalVelocity = Vector3.Project(currentVelocity, Up);
+
+            // Apply air drag to slow down X and Z movement
+            if (airDrag > 0f)
+            {
+                // Calculate the damping factor (exponential decay)
+                float dragFactor = Mathf.Exp(-airDrag * dt);
+                currentVelocityPlanar *= dragFactor;
+            }
+
+            // Apply air control: blend between damped current velocity and input velocity
+            if (airControl > 0f)
+            {
+                // Project input velocity onto the plane defined by Up (to ignore vertical input)
+                Vector3 inputVelocityPlanar = Vector3.ProjectOnPlane(InputVelocity, Up);
+
+                // Blend planar velocity based on airControl (0 = no change, 1 = full input control)
+                currentVelocityPlanar = Vector3.Lerp(currentVelocityPlanar, inputVelocityPlanar, airControl);
+            }
+
+            // Combine planar and vertical components
+            Velocity = currentVelocityPlanar + verticalVelocity;
+
+            // Calculate displacement with the updated velocity
             Vector3 displacement = CustomUtilities.Multiply(Velocity, dt);
             UnstableCollideAndSlide(ref position, displacement, dt);
         }
